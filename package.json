@@ -1,8 +1,9 @@
 {
-  "name": "my-app",
+  "name": "sneakers-reviews",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fontsource/poppins": "^4.5.9",
     "@reduxjs/toolkit": "^1.8.5",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
@@ -21,9 +22,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test:dev": "react-scripts test --watchAll=false",
+    "test": "react-scripts test --passWithNoTests",
     "eject": "react-scripts eject",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test-coverage": "react-scripts test --coverage --watchAll=false --passWithNoTests"
   },
   "eslintConfig": {
     "extends": [
