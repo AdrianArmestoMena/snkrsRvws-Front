@@ -42,7 +42,13 @@ const SignUp = (): JSX.Element => {
 
   return (
     <SignUpStyle>
+      <h2 className="action-call">
+        Join the {<span className="action-call__outstanding">SnkrsRvws</span>}{" "}
+        communty
+      </h2>
+
       <Form
+        className="form"
         noValidate
         validated={validated}
         onSubmit={(event) => {
@@ -109,7 +115,7 @@ const SignUp = (): JSX.Element => {
           </Form.Control.Feedback>
         </Form.Group>
         <Button
-          className="col mt-4 btn btn-primary"
+          className="col mt-4 btn btn-primary form__button"
           variant="primary"
           type="submit"
         >
