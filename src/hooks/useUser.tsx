@@ -1,20 +1,54 @@
-import axios from "axios";
-import { SignUp } from "../types/User";
+import axios, { AxiosResponse } from "axios";
+import { useCallback } from "react";
+import { loginActionCreator } from "../store/features/users/usersSlice";
+import { useAppDispatch } from "../store/hooks";
+import { LoginResponse, LoginUser, IUser } from "../types/User";
+import getTokenUser from "../utils/getUserData";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const useUser = () => {
-  const signUp = async ({ userName, password, email }: SignUp) => {
+  const dispatch = useAppDispatch();
+
+  const signUp = async ({ userName, password, email }: IUser) => {
     try {
-      await axios.post(`${apiUrl}/users/signUp`, {
-        userName,
-        password,
-        email,
-      });
+      const response: AxiosResponse<any> = await axios.post(
+        `${apiUrl}/users/signUp`,
+        {
+          userName,
+          password,
+          email,
+        }
+      );
+      return response.data;
     } catch (error) {}
   };
 
-  return { signUp };
+  const logIn = useCallback(
+    async ({ userName, password }: LoginUser): Promise<void> => {
+      try {
+        const {
+          data: {
+            user: { token },
+          },
+        }: AxiosResponse<LoginResponse> = await axios.post(
+          `${apiUrl}/users/log-in`,
+          {
+            userName,
+            password,
+          }
+        );
+
+        const tokenContent = getTokenUser(token);
+
+        localStorage.setItem("token", token);
+
+        dispatch(loginActionCreator(tokenContent));
+      } catch (error) {}
+    },
+    [dispatch]
+  );
+  return { signUp, logIn };
 };
 
 export default useUser;
