@@ -42,7 +42,7 @@ describe("Given a FormRegister function", () => {
       const input = screen.getByLabelText("Email");
       await userEvent.type(input, users.email);
 
-      const button = screen.getByRole("button", { name: "Submit" });
+      const button = screen.getByRole("button", { name: "Sign up" });
 
       await userEvent.click(button);
 
@@ -71,7 +71,7 @@ describe("Given a FormRegister function", () => {
       const input = screen.getByLabelText("Email");
       await userEvent.type(input, users.email);
 
-      const button = screen.getByRole("button", { name: "Submit" });
+      const button = screen.getByRole("button", { name: "Sign up" });
 
       await userEvent.click(button);
 

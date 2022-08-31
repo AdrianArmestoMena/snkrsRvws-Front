@@ -119,7 +119,7 @@ const SignUp = (): JSX.Element => {
           variant="primary"
           type="submit"
         >
-          Submit
+          Sign up
         </Button>
       </Form>
     </SignUpStyle>
