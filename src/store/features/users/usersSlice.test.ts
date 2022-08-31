@@ -1,11 +1,10 @@
 import { User } from "./model/User";
-import { logIn, usersReducer } from "./usersSlice";
+import { loginActionCreator, usersReducer } from "./usersSlice";
 
 describe("Given a users reducer function", () => {
   const initialState: User = {
     id: "",
     userName: "",
-    token: "",
   };
 
   describe("When it is called with an undefined action and an unknow state", () => {
@@ -20,10 +19,9 @@ describe("Given a users reducer function", () => {
         const newUser: User = {
           id: "Anton",
           userName: "Adrian",
-          token: "12345",
         };
 
-        const actualUser = usersReducer(undefined, logIn(newUser));
+        const actualUser = usersReducer(undefined, loginActionCreator(newUser));
 
         expect(actualUser).toStrictEqual(newUser);
       });

@@ -4,7 +4,6 @@ import { User } from "./model/User";
 const initialState: User = {
   id: "",
   userName: "",
-  token: "",
 };
 
 export const usersSlice = createSlice({
@@ -17,6 +16,6 @@ export const usersSlice = createSlice({
 
 export const usersReducer = usersSlice.reducer;
 
-export const { logIn } = usersSlice.actions;
+export const { logIn: loginActionCreator } = usersSlice.actions;
 
 export const loginReducer = usersSlice.reducer;
