@@ -6,5 +6,4 @@ export interface ProtoUser {
 export interface User {
   id: string;
   userName: string;
-  token: string;
 }
