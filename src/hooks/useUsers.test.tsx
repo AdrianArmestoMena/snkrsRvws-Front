@@ -1,18 +1,38 @@
 import { renderHook } from "@testing-library/react";
-import axios from "axios";
+import { loginActionCreator } from "../store/features/users/usersSlice";
 import Wrapper from "../test-utils/Wrapper";
-import { IUser } from "../types/User";
+import { IUser, LoginUser } from "../types/User";
 import useUser from "./useUser";
 
-jest.mock("axios");
-const apiUrl = process.env.REACT_APP_API_URL;
+const mockUseDispatch = jest.fn();
+
+jest.mock("../store/hooks", () => ({
+  ...jest.requireActual("../store/hooks"),
+  useAppDispatch: () => mockUseDispatch,
+}));
+
+const mockGetToken = jest.fn();
+jest.mock("../utils/getUserData", () => () => mockGetToken);
+
+jest.mock("../store/features/users/usersSlice", () => ({
+  ...jest.requireActual("../store/features/users/usersSlice"),
+  loginActionCreator: jest.fn(),
+}));
+
 describe("Given a useUserApi hook", () => {
   describe("When signUp function is called with a User data", () => {
-    test("Then it should call axios post method with the given url and user", async () => {
+    test("The it should return the response of the request", async () => {
       const mockUser: IUser = {
         userName: "a",
         password: "a",
         email: "a",
+      };
+      const newUser = {
+        userName: "Adriana",
+        email: "arm@this.com",
+        contacts: [],
+        reviews: [],
+        id: "630d2cfb6b681f3c99cf1717",
       };
 
       const {
@@ -22,31 +42,29 @@ describe("Given a useUserApi hook", () => {
       } = renderHook(useUser, { wrapper: Wrapper });
       await signUp(mockUser);
 
-      expect(axios.post).toHaveBeenCalledWith(
-        `${apiUrl}/users/signUp`,
-        mockUser
-      );
+      const result = await signUp(mockUser);
+
+      expect(result.newUser).toStrictEqual(newUser);
     });
   });
 
-  describe("When signin function is called with a UserName and a password", () => {
-    test("Then it should post a new user", async () => {
-      const mockUser: IUser = {
-        userName: "a",
-        password: "a",
-        email: "a",
+  describe("When login function is called with a User name and a password", () => {
+    test("Then it should return the response of the request", async () => {
+      const mockUser: LoginUser = {
+        userName: "Adrian",
+        password: "Armesto",
       };
+      const user = { token: "12345" };
 
       const {
         result: {
-          current: { signUp },
+          current: { logIn },
         },
       } = renderHook(useUser, { wrapper: Wrapper });
-      await signUp(mockUser);
+      await logIn(mockUser);
 
-      expect(axios.post).toHaveBeenCalledWith(
-        `${apiUrl}/users/signUp`,
-        mockUser
+      expect(mockUseDispatch).toHaveBeenCalledWith(
+        loginActionCreator(mockGetToken(user.token))
       );
     });
   });
