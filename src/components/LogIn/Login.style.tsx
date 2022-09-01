@@ -5,7 +5,9 @@ const LoginStyle = styled.main`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 80%;
+  width: 100%;
+  height: 100%;
+  padding: 30px;
   gap: 25px;
   @media (min-width: 900px) {
     flex-direction: row;
