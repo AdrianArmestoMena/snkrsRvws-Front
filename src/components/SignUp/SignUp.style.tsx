@@ -6,6 +6,7 @@ const SignUpStyle = styled.main`
   align-items: center;
   justify-content: center;
   width: 80%;
+  gap: 20px;
   @media (min-width: 900px) {
     flex-direction: row;
   }
