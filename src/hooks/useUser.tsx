@@ -13,7 +13,7 @@ const useUser = () => {
   const signUp = async ({ userName, password, email }: IUser) => {
     try {
       const response: AxiosResponse<any> = await axios.post(
-        `${apiUrl}/users/signUp`,
+        `${apiUrl}/users/signup`,
         {
           userName,
           password,
@@ -32,7 +32,7 @@ const useUser = () => {
             user: { token },
           },
         }: AxiosResponse<LoginResponse> = await axios.post(
-          `${apiUrl}/users/log-in`,
+          `${apiUrl}/users/login`,
           {
             userName,
             password,

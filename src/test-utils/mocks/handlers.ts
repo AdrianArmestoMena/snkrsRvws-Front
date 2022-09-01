@@ -3,7 +3,7 @@ import { rest } from "msw";
 const apiUrl = process.env.REACT_APP_API_URL as string;
 
 const handlers = [
-  rest.post(`${apiUrl}/users/log-in`, async (req, res, ctx) => {
+  rest.post(`${apiUrl}/users/login`, async (req, res, ctx) => {
     const { password } = await req.json();
     const status = password === "" ? 400 : 200;
 
@@ -18,7 +18,7 @@ const handlers = [
     );
   }),
 
-  rest.post(`${apiUrl}/users/signUp`, async (req, res, ctx) => {
+  rest.post(`${apiUrl}/users/signup`, async (req, res, ctx) => {
     const { password } = await req.json();
     const status = password === "" ? 400 : 200;
 
