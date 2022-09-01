@@ -5,14 +5,13 @@ import { ThemeProvider } from "styled-components";
 import "./App.css";
 import styledMainTheme from "./stylesUtils/styledMainTheme";
 import Login from "./components/LogIn/LogIn";
+import Header from "./components/Header/Header";
 
 const App = () => {
   return (
     <ThemeProvider theme={styledMainTheme}>
       <>
-        <header className="App-header">
-          <p>SnkrsRvws</p>
-        </header>
+        <Header />
         <Routes>
           <Route path="/" element={<Navigate to="/signup" />} />
           <Route path="/signup" element={<SignUp />} />
