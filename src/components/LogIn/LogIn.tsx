@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import useUser from "../../hooks/useUser";
 import { LoginUser } from "../../types/User";
 import LoginStyle from "./Login.style";
 
@@ -8,8 +9,26 @@ const Login = (): JSX.Element => {
     userName: "",
     password: "",
   };
-
+  const [validated, setValidated] = useState(false);
   const [user, setUser] = useState(initialState);
+
+  const { logIn } = useUser();
+
+  const handleClick = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    if (!form.checkValidity()) {
+      event.stopPropagation();
+      setValidated(true);
+    } else {
+      logIn({
+        userName: user.userName,
+        password: user.password,
+      });
+      setUser(initialState);
+      setValidated(false);
+    }
+  };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [event.target.name]: event.target.value });
@@ -21,7 +40,14 @@ const Login = (): JSX.Element => {
         Join the {<span className="action-call__outstanding">SnkrsRvws</span>}{" "}
         communty
       </h2>
-      <Form className="form" noValidate>
+      <Form
+        noValidate
+        validated={validated}
+        onSubmit={(event) => {
+          handleClick(event);
+        }}
+        className="form"
+      >
         <Form.Group className="mb-3" controlId="Name">
           <Form.Label>User Name</Form.Label>
           <Form.Control
@@ -45,7 +71,7 @@ const Login = (): JSX.Element => {
             type="password"
             placeholder="Password"
             onChange={handleChange}
-            value={user.userName}
+            value={user.password}
           />
           <Form.Control.Feedback type="invalid">
             Please provide a password.
