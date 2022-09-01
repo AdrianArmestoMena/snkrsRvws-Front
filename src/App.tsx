@@ -9,7 +9,7 @@ import Login from "./components/LogIn/LogIn";
 const App = () => {
   return (
     <ThemeProvider theme={styledMainTheme}>
-      <div className="App">
+      <>
         <header className="App-header">
           <p>SnkrsRvws</p>
         </header>
@@ -19,7 +19,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<SignUp />} />
         </Routes>
-      </div>
+      </>
     </ThemeProvider>
   );
 };
