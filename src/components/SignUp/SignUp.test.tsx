@@ -77,7 +77,7 @@ describe("Given a FormRegister function", () => {
 
       expect(mockUseUsers.signUp).not.toHaveBeenCalled();
     });
-    test("And if the user write in the Last name input it should show", async () => {
+    test("And if the user write in the Email input it should show", async () => {
       const type = "Esta";
       render(<SignUp />);
       const input = screen.getByLabelText("Email");
@@ -104,7 +104,7 @@ describe("Given a FormRegister function", () => {
       expect(changeUsers).toHaveBeenCalled();
     });
 
-    test("And if the user write in the Email address input it should show", async () => {
+    test("And if the user write in the Repeat address input it should show", async () => {
       const users = {};
 
       const changeUsers = jest.fn();
