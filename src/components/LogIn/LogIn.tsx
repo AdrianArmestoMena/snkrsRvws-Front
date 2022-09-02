@@ -62,7 +62,6 @@ const Login = (): JSX.Element => {
             Please choose a username.
           </Form.Control.Feedback>
         </Form.Group>
-
         <Form.Group className="mb-3" controlId="Pasword">
           <Form.Label>Password</Form.Label>
           <Form.Control
