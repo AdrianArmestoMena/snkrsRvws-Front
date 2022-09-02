@@ -44,9 +44,8 @@ const SignUp = (): JSX.Element => {
     <SignUpStyle>
       <h2 className="action-call">
         Join the {<span className="action-call__outstanding">SnkrsRvws</span>}{" "}
-        communty
+        community
       </h2>
-
       <Form
         className="form"
         noValidate

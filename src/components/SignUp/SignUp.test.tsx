@@ -14,7 +14,7 @@ describe("Given a FormRegister function", () => {
       render(<SignUp />);
 
       const heading = screen.getByRole("heading", {
-        name: "Join the SnkrsRvws communty",
+        name: "Join the SnkrsRvws community",
       });
 
       expect(heading).toBeInTheDocument();
