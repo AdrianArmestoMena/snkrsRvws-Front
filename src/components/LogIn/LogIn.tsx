@@ -38,7 +38,7 @@ const Login = (): JSX.Element => {
     <LoginStyle>
       <h2 className="action-call">
         Join the {<span className="action-call__outstanding">SnkrsRvws</span>}{" "}
-        communty
+        community
       </h2>
       <Form
         noValidate
