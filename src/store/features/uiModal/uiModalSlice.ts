@@ -14,32 +14,22 @@ export const uiModalsSlice = createSlice({
   name: "ui",
   initialState,
   reducers: {
-    loading: (state: UiModal, action: PayloadAction<UiModal>) => {
-      return {
-        isLoading: true,
-        modal: {
-          isOpen: true,
-          text: "Loading...",
-          type: "loading",
-        },
-      };
-    },
-    closeLoading: (state: UiModal, action: PayloadAction<UiModal>) => {
-      return {
-        ...state,
-        isLoading: false,
-      };
-    },
-    throwMessageError: (state: UiModal, action: PayloadAction<UiModal>) => {
-      return {
-        ...state,
-        modal: {
-          isOpen: true,
-          text: "Something went wrong",
-          type: "error",
-        },
-      };
-    },
+    loading: (state: UiModal) => ({
+      ...state,
+      isLoading: true,
+    }),
+    closeLoading: (state: UiModal) => ({
+      ...state,
+      isLoading: false,
+    }),
+    throwMessageError: (state: UiModal, action: PayloadAction<string>) => ({
+      ...state,
+      modal: {
+        isOpen: true,
+        text: action.payload,
+        type: "error",
+      },
+    }),
   },
 });
 

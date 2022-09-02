@@ -21,7 +21,6 @@ const handlers = [
   rest.post(`${apiUrl}/users/signup`, async (req, res, ctx) => {
     const { password } = await req.json();
     const status = password === "" ? 400 : 200;
-
     return res(
       ctx.status(status),
       ctx.json({
