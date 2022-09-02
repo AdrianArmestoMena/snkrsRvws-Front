@@ -11,7 +11,7 @@ const App = () => {
   return (
     <ThemeProvider theme={styledMainTheme}>
       <Header />
-      <div className="mainn-container">
+      <div className="main-container">
         <Routes>
           <Route path="/" element={<Navigate to="/signup" />} />
           <Route path="/signup" element={<SignUp />} />
