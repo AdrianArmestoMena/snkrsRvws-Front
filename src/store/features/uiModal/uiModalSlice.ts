@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { uiModal } from "./model/uiModal";
+import { UiModal } from "./model/uiModal";
 
-const initialState: uiModal = {
+const initialState: UiModal = {
   isLoading: false,
   modal: {
     isOpen: false,
@@ -14,7 +14,7 @@ export const uiModalsSlice = createSlice({
   name: "ui",
   initialState,
   reducers: {
-    loading: (state: uiModal, action: PayloadAction<uiModal>) => {
+    loading: (state: UiModal, action: PayloadAction<UiModal>) => {
       return {
         isLoading: true,
         modal: {
@@ -24,13 +24,13 @@ export const uiModalsSlice = createSlice({
         },
       };
     },
-    closeLoading: (state: uiModal, action: PayloadAction<uiModal>) => {
+    closeLoading: (state: UiModal, action: PayloadAction<UiModal>) => {
       return {
         ...state,
         isLoading: false,
       };
     },
-    throwMessageError: (state: uiModal, action: PayloadAction<uiModal>) => {
+    throwMessageError: (state: UiModal, action: PayloadAction<UiModal>) => {
       return {
         ...state,
         modal: {

@@ -1,4 +1,4 @@
-import { uiModal } from "./model/uiModal";
+import { UiModal } from "./model/uiModal";
 import {
   closeLoadingActionCreator,
   loadingUiActionCreator,
@@ -7,7 +7,7 @@ import {
 } from "./uiModalSlice";
 
 describe("Given a uiModal reducer function", () => {
-  const initialState: uiModal = {
+  const initialState: UiModal = {
     isLoading: false,
     modal: {
       isOpen: false,
@@ -25,7 +25,7 @@ describe("Given a uiModal reducer function", () => {
 
     describe("When it is called with a loading action", () => {
       test("Then it should return the uiState loading on the action payload", () => {
-        const uiStateloading: uiModal = {
+        const uiStateloading: UiModal = {
           isLoading: true,
           modal: {
             isOpen: true,
@@ -44,7 +44,7 @@ describe("Given a uiModal reducer function", () => {
 
       describe("When it is called with a close laoding action", () => {
         test("Then it should return the uiState loading on the action payload", () => {
-          const uiStateloading: uiModal = {
+          const uiStateloading: UiModal = {
             isLoading: false,
             modal: {
               isOpen: false,
@@ -64,7 +64,7 @@ describe("Given a uiModal reducer function", () => {
 
       describe("When it is called with a throw error action", () => {
         test("Then it should return the uiState loading on the action payload", () => {
-          const uiStateloading: uiModal = {
+          const uiStateloading: UiModal = {
             isLoading: false,
             modal: {
               isOpen: true,

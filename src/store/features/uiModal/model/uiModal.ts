@@ -1,4 +1,4 @@
-export interface uiModal {
+export interface UiModal {
   isLoading: boolean;
   modal: {
     isOpen: boolean;
