@@ -1,10 +1,13 @@
 import styled from "styled-components";
 
 const HeaderStyle = styled.header`
+  .main-container {
+    position: absolute;
+    background-color: ${(props) => props.theme.drakGreen};
+  }
   .nav {
     &bar {
       background-color: ${(props) => props.theme.drakGreen};
-      height: 80px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -12,7 +15,7 @@ const HeaderStyle = styled.header`
       position: sticky;
       top: 0;
       z-index: 20;
-      padding: 30px;
+      padding: 0 30px 0 30px;
     }
 
     &-container {
@@ -28,16 +31,14 @@ const HeaderStyle = styled.header`
       text-decoration: none;
       font-size: 2rem;
       flex: 1;
-      margin-bottom: 50px;
       display: inline;
     }
     &-menu {
       display: flex;
       list-style: none;
       text-align: center;
-      margin-right: 2rem;
-      padding-bottom: 20px;
       gap: 50px;
+      margin: 0;
     }
     &-links {
       color: ${(props) => props.theme.lightGreen};
@@ -49,7 +50,6 @@ const HeaderStyle = styled.header`
     }
     &-item {
       line-height: 40px;
-      margin-right: 1rem;
     }
     &-item:after {
       display: block;
@@ -82,14 +82,13 @@ const HeaderStyle = styled.header`
         left: -110%;
         opacity: 1;
         transition: all 0.5s ease;
+        padding: 40px;
       }
 
       &-menu.active {
         background: ${(props) => props.theme.drakGreen};
         left: 0px;
-        opacity: 1;
         transition: all 0.5s ease;
-        z-index: 1;
       }
       &-item .active {
         color: ${(props) => props.theme.lightGreen};
@@ -106,15 +105,6 @@ const HeaderStyle = styled.header`
         color: ${(props) => props.theme.loghtGreen};
       }
     }
-  }
-
-  .main-container {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: ${(props) => props.theme.drakGreen};
   }
 `;
 

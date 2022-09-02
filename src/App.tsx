@@ -10,15 +10,15 @@ import Header from "./components/Header/Header";
 const App = () => {
   return (
     <ThemeProvider theme={styledMainTheme}>
-      <>
-        <Header />
+      <Header />
+      <div className="mainn-container">
         <Routes>
           <Route path="/" element={<Navigate to="/signup" />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<SignUp />} />
         </Routes>
-      </>
+      </div>
     </ThemeProvider>
   );
 };
