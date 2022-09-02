@@ -1,5 +1,10 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { useCallback } from "react";
+import {
+  closeLoadingActionCreator,
+  loadingUiActionCreator,
+  throwMessageErrorActionCreator,
+} from "../store/features/uiModal/uiModalSlice";
 import { loginActionCreator } from "../store/features/users/usersSlice";
 import { useAppDispatch } from "../store/hooks";
 import { LoginResponse, LoginUser, IUser } from "../types/User";
@@ -12,6 +17,7 @@ const useUser = () => {
 
   const signUp = async ({ userName, password, email }: IUser) => {
     try {
+      dispatch(loadingUiActionCreator());
       const response: AxiosResponse<any> = await axios.post(
         `${apiUrl}/users/signup`,
         {
@@ -21,12 +27,17 @@ const useUser = () => {
         }
       );
       return response.data;
-    } catch (error) {}
+    } catch (error) {
+      const errorObject = JSON.parse((error as AxiosError).request.response);
+      dispatch(throwMessageErrorActionCreator(errorObject.error));
+    }
+    dispatch(closeLoadingActionCreator());
   };
 
   const logIn = useCallback(
     async ({ userName, password }: LoginUser): Promise<void> => {
       try {
+        dispatch(loadingUiActionCreator());
         const {
           data: {
             user: { token },
@@ -44,7 +55,12 @@ const useUser = () => {
         localStorage.setItem("token", token);
 
         dispatch(loginActionCreator(tokenContent));
-      } catch (error) {}
+      } catch (error) {
+        const errorObject = JSON.parse((error as AxiosError).request.response);
+
+        dispatch(throwMessageErrorActionCreator(errorObject.error));
+      }
+      dispatch(closeLoadingActionCreator());
     },
     [dispatch]
   );
