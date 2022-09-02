@@ -28,16 +28,13 @@ describe("Given a uiModal reducer function", () => {
         const uiStateloading: UiModal = {
           isLoading: true,
           modal: {
-            isOpen: true,
-            text: "Loading...",
-            type: "loading",
+            isOpen: false,
+            text: "",
+            type: "error",
           },
         };
 
-        const actualUser = uiModalReducer(
-          undefined,
-          loadingUiActionCreator(uiStateloading)
-        );
+        const actualUser = uiModalReducer(undefined, loadingUiActionCreator());
 
         expect(actualUser).toStrictEqual(uiStateloading);
       });
@@ -55,7 +52,7 @@ describe("Given a uiModal reducer function", () => {
 
           const actualUser = uiModalReducer(
             undefined,
-            closeLoadingActionCreator(uiStateloading)
+            closeLoadingActionCreator()
           );
 
           expect(actualUser).toStrictEqual(uiStateloading);
@@ -68,14 +65,14 @@ describe("Given a uiModal reducer function", () => {
             isLoading: false,
             modal: {
               isOpen: true,
-              text: "Something went wrong",
+              text: "Error en el test",
               type: "error",
             },
           };
 
           const actualUser = uiModalReducer(
             undefined,
-            throwMessageErrorActionCreator(uiStateloading)
+            throwMessageErrorActionCreator("Error en el test")
           );
 
           expect(actualUser).toStrictEqual(uiStateloading);
