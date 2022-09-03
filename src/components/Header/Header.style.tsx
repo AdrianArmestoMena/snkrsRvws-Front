@@ -26,6 +26,7 @@ const HeaderStyle = styled.header`
       height: 80px;
     }
     &-logo {
+      cursor: pointer;
       color: ${(props) => props.theme.lightGreen};
       align-items: center;
       text-decoration: none;
@@ -41,6 +42,7 @@ const HeaderStyle = styled.header`
       margin: 0;
     }
     &-links {
+      cursor: pointer;
       color: ${(props) => props.theme.lightGreen};
       text-decoration: none;
       height: 100%;

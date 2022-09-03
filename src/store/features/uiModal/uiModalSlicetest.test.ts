@@ -1,5 +1,6 @@
 import { UiModal } from "./model/uiModal";
 import {
+  closeAllActionCreator,
   closeLoadingActionCreator,
   loadingUiActionCreator,
   throwMessageErrorActionCreator,
@@ -76,6 +77,26 @@ describe("Given a uiModal reducer function", () => {
           );
 
           expect(actualUser).toStrictEqual(uiStateloading);
+        });
+
+        describe("When it is called with a close all action", () => {
+          test("Then it should return the loadiing proprty false and isOpen false to", () => {
+            const uiStateCloseAll: UiModal = {
+              isLoading: false,
+              modal: {
+                isOpen: false,
+                text: "",
+                type: "",
+              },
+            };
+
+            const actualUser = uiModalReducer(
+              undefined,
+              closeAllActionCreator()
+            );
+
+            expect(actualUser).toStrictEqual(uiStateCloseAll);
+          });
         });
       });
     });
