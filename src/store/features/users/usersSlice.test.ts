@@ -13,18 +13,26 @@ describe("Given a users reducer function", () => {
 
       expect(usersReducer(undefined, unknownAction)).toEqual(initialState);
     });
+  });
 
-    describe("When it is called with a login action", () => {
-      test("Then it should return the user on the action payload", () => {
-        const newUser: User = {
-          id: "Anton",
-          userName: "Adrian",
-        };
+  describe("When it is called with a login action", () => {
+    test("Then it should return the user on the action payload", () => {
+      const newUser: User = {
+        id: "Anton",
+        userName: "Adrian",
+      };
 
-        const actualUser = usersReducer(undefined, loginActionCreator(newUser));
+      const actualUser = usersReducer(undefined, loginActionCreator(newUser));
 
-        expect(actualUser).toStrictEqual(newUser);
-      });
+      expect(actualUser).toStrictEqual(newUser);
+    });
+  });
+
+  describe("When it is called with an logout action", () => {
+    test("Then it should return the initial state", () => {
+      const unknownAction = { type: "logout" };
+
+      expect(usersReducer(undefined, unknownAction)).toEqual(initialState);
     });
   });
 });
