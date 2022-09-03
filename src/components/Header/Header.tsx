@@ -2,11 +2,13 @@ import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import useUser from "../../hooks/useUser";
 import { useAppSelector } from "../../store/hooks";
 import HeaderStyle from "./Header.style";
 
 const Header = (): JSX.Element => {
   const userState = useAppSelector((state) => state.users);
+  const { logOut } = useUser();
 
   const { id } = userState;
   const [click, setClick] = useState(false);
@@ -54,9 +56,15 @@ const Header = (): JSX.Element => {
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink to="/" className="nav-links" onClick={Close}>
+                  <button
+                    className="nav-links"
+                    onClick={() => {
+                      Close();
+                      logOut();
+                    }}
+                  >
                     Log out
-                  </NavLink>
+                  </button>
                 </li>{" "}
               </>
             )}
