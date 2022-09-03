@@ -13,6 +13,10 @@ jest.mock("../../store/hooks", () => ({
   useAppSelector: () => mockUserState,
 }));
 
+const mockuseUser = { logOut: jest.fn() };
+
+jest.mock("../../hooks/useUser", () => () => mockuseUser);
+
 describe("Given a Header function", () => {
   beforeEach(() => jest.clearAllMocks());
 
@@ -59,7 +63,7 @@ describe("Given a Header function", () => {
         name: "Create Review",
       });
 
-      const logout = screen.getByRole("link", {
+      const logout = screen.getByRole("button", {
         name: "Log out",
       });
 
@@ -76,6 +80,19 @@ describe("Given a Header function", () => {
       userEvent.click(burger);
 
       expect(current.current[0]).toBe(true);
+    });
+
+    test("Then if Logout button is clicked it should call the use users's log out function", () => {
+      mockUserState.id = "123456789012";
+      wrappedRender(<Header />);
+
+      const logout = screen.getByRole("button", {
+        name: "Log out",
+      });
+
+      userEvent.click(logout);
+
+      expect(mockuseUser.logOut).toHaveBeenCalled();
     });
   });
 });
