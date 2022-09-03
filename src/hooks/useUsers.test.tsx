@@ -1,5 +1,8 @@
 import { renderHook } from "@testing-library/react";
-import { closeAllActionCreator } from "../store/features/uiModal/uiModalSlice";
+import {
+  closeAllActionCreator,
+  loadingUiActionCreator,
+} from "../store/features/uiModal/uiModalSlice";
 import { loginActionCreator } from "../store/features/users/usersSlice";
 import Wrapper from "../test-utils/Wrapper";
 import { IUser, LoginUser } from "../types/User";
@@ -28,7 +31,7 @@ jest.mock("../store/features/users/usersSlice", () => ({
 
 describe("Given a useUserApi hook", () => {
   describe("When signUp function is called with a User data", () => {
-    test("The it should return the response of the request", async () => {
+    test("The it should return the response of the request, call the dispatch with the closeall acion creator and call the dispatch with loading action creator", async () => {
       const mockUser: IUser = {
         userName: "a",
         password: "a",
@@ -52,6 +55,8 @@ describe("Given a useUserApi hook", () => {
       const result = await signUp(mockUser);
 
       expect(result.newUser).toStrictEqual(newUser);
+      expect(mockUseDispatch).toHaveBeenCalledWith(closeAllActionCreator());
+      expect(mockUseDispatch).toHaveBeenCalledWith(loadingUiActionCreator());
     });
   });
 
@@ -74,6 +79,7 @@ describe("Given a useUserApi hook", () => {
         loginActionCreator(mockGetToken(user.token))
       );
       expect(mockUseDispatch).toHaveBeenCalledWith(closeAllActionCreator());
+      expect(mockUseDispatch).toHaveBeenCalledWith(loadingUiActionCreator());
     });
   });
 

@@ -32,7 +32,9 @@ const useUser = () => {
       dispatch(throwMessageErrorActionCreator(errorObject.error));
       return false;
     }
-    dispatch(closeLoadingActionCreator());
+    navigate("/login");
+    dispatch(closeAllActionCreator());
+
     return response.data;
   };
 
@@ -61,7 +63,7 @@ const useUser = () => {
         dispatch(throwMessageErrorActionCreator(errorObject.error));
         return false;
       }
-      dispatch(closeLoadingActionCreator());
+
       navigate("/");
       dispatch(closeAllActionCreator());
 
