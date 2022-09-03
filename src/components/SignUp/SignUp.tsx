@@ -22,6 +22,7 @@ const SignUp = (): JSX.Element => {
   const handleClick = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
+
     if (!form.checkValidity() || !paswordsChecker(user)) {
       event.stopPropagation();
       setValidated(true);

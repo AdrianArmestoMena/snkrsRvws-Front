@@ -9,6 +9,7 @@ const Login = (): JSX.Element => {
     userName: "",
     password: "",
   };
+
   const [validated, setValidated] = useState(false);
   const [user, setUser] = useState(initialState);
 
@@ -17,11 +18,12 @@ const Login = (): JSX.Element => {
   const handleClick = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
+
     if (!form.checkValidity()) {
       event.stopPropagation();
       setValidated(true);
     } else {
-      logIn({
+      await logIn({
         userName: user.userName,
         password: user.password,
       });
