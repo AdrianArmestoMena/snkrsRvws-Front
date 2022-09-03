@@ -1,13 +1,13 @@
 import React from "react";
-import SignUp from "./components/SignUp/SignUp";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
+import { useAppSelector } from "../../store/hooks";
+import styledMainTheme from "../../stylesUtils/styledMainTheme";
+import Header from "../Header/Header";
+import Login from "../LogIn/LogIn";
+import ModalError from "../Modal/ModalError";
+import SignUp from "../SignUp/SignUp";
 import "./App.css";
-import styledMainTheme from "./stylesUtils/styledMainTheme";
-import Login from "./components/LogIn/LogIn";
-import Header from "./components/Header/Header";
-import ModalError from "./components/Modal/ModalError";
-import { useAppSelector } from "./store/hooks";
 
 const App = () => {
   const {

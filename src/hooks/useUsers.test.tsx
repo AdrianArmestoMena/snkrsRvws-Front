@@ -1,5 +1,4 @@
 import { renderHook } from "@testing-library/react";
-import { throwMessageErrorActionCreator } from "../store/features/uiModal/uiModalSlice";
 import { loginActionCreator } from "../store/features/users/usersSlice";
 import Wrapper from "../test-utils/Wrapper";
 import { IUser, LoginUser } from "../types/User";
