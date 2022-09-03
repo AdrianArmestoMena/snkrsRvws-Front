@@ -1,4 +1,5 @@
 import { renderHook } from "@testing-library/react";
+import { closeAllActionCreator } from "../store/features/uiModal/uiModalSlice";
 import { loginActionCreator } from "../store/features/users/usersSlice";
 import Wrapper from "../test-utils/Wrapper";
 import { IUser, LoginUser } from "../types/User";
@@ -55,7 +56,7 @@ describe("Given a useUserApi hook", () => {
   });
 
   describe("When login function is called with a User name and a password", () => {
-    test("Then it should return the response of the request", async () => {
+    test("Then it should call the disptach with the login action creator called with get token function called with the user token", async () => {
       const mockUser: LoginUser = {
         userName: "Adrian",
         password: "Armesto",
@@ -72,6 +73,7 @@ describe("Given a useUserApi hook", () => {
       expect(mockUseDispatch).toHaveBeenCalledWith(
         loginActionCreator(mockGetToken(user.token))
       );
+      expect(mockUseDispatch).toHaveBeenCalledWith(closeAllActionCreator());
     });
   });
 

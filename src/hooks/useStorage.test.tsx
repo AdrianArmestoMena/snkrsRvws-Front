@@ -1,6 +1,4 @@
 import { renderHook } from "@testing-library/react";
-import { act } from "react-dom/test-utils";
-import { log } from "util";
 import { loginActionCreator } from "../store/features/users/usersSlice";
 import mockLocalStorage from "../test-utils/mocks/localStorageMock";
 import { UserToken } from "../types/User";
