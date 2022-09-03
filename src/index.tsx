@@ -1,6 +1,5 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "@fontsource/poppins";
 import "./scss/custom.scss";
@@ -8,6 +7,7 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
+import App from "./components/App/App";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
