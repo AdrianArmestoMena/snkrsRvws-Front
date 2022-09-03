@@ -1,6 +1,8 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import {
+  closeAllActionCreator,
   closeLoadingActionCreator,
   loadingUiActionCreator,
   throwMessageErrorActionCreator,
@@ -14,28 +16,28 @@ const apiUrl = process.env.REACT_APP_API_URL;
 
 const useUser = () => {
   const dispatch = useAppDispatch();
-
+  const navigate = useNavigate();
   const signUp = async ({ userName, password, email }: IUser) => {
+    let response: AxiosResponse<any>;
     try {
       dispatch(loadingUiActionCreator());
-      const response: AxiosResponse<any> = await axios.post(
-        `${apiUrl}/users/signup`,
-        {
-          userName,
-          password,
-          email,
-        }
-      );
-      return response.data;
+      response = await axios.post(`${apiUrl}/users/signup`, {
+        userName,
+        password,
+        email,
+      });
     } catch (error) {
       const errorObject = JSON.parse((error as AxiosError).request.response);
+      dispatch(closeLoadingActionCreator());
       dispatch(throwMessageErrorActionCreator(errorObject.error));
+      return false;
     }
     dispatch(closeLoadingActionCreator());
+    return response.data;
   };
 
   const logIn = useCallback(
-    async ({ userName, password }: LoginUser): Promise<void> => {
+    async ({ userName, password }: LoginUser): Promise<boolean> => {
       try {
         dispatch(loadingUiActionCreator());
         const {
@@ -49,20 +51,23 @@ const useUser = () => {
             password,
           }
         );
-
         const tokenContent = getTokenUser(token);
 
         localStorage.setItem("token", token);
-
         dispatch(loginActionCreator(tokenContent));
       } catch (error) {
         const errorObject = JSON.parse((error as AxiosError).request.response);
-
+        dispatch(closeLoadingActionCreator());
         dispatch(throwMessageErrorActionCreator(errorObject.error));
+        return false;
       }
       dispatch(closeLoadingActionCreator());
+      navigate("/");
+      dispatch(closeAllActionCreator());
+
+      return true;
     },
-    [dispatch]
+    [dispatch, navigate]
   );
   return { signUp, logIn };
 };
