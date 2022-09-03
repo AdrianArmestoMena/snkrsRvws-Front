@@ -3,7 +3,10 @@ import {
   closeAllActionCreator,
   loadingUiActionCreator,
 } from "../store/features/uiModal/uiModalSlice";
-import { loginActionCreator } from "../store/features/users/usersSlice";
+import {
+  loginActionCreator,
+  logOutActionCreator,
+} from "../store/features/users/usersSlice";
 import Wrapper from "../test-utils/Wrapper";
 import { IUser, LoginUser } from "../types/User";
 import useUser from "./useUser";
@@ -119,6 +122,20 @@ describe("Given a useUserApi hook", () => {
       await signUp(mockUser);
 
       expect(mockUseDispatch).toHaveBeenCalledWith(mockThrowError);
+    });
+  });
+
+  describe("When logout function is called", () => {
+    test("Then it should call the dispatch with logout", async () => {
+      const {
+        result: {
+          current: { logOut },
+        },
+      } = renderHook(useUser, { wrapper: Wrapper });
+
+      await logOut();
+
+      expect(mockUseDispatch).toHaveBeenCalledWith(logOutActionCreator());
     });
   });
 });
