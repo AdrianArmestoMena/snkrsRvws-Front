@@ -7,7 +7,10 @@ import {
   loadingUiActionCreator,
   throwMessageErrorActionCreator,
 } from "../store/features/uiModal/uiModalSlice";
-import { loginActionCreator } from "../store/features/users/usersSlice";
+import {
+  loginActionCreator,
+  logOutActionCreator,
+} from "../store/features/users/usersSlice";
 import { useAppDispatch } from "../store/hooks";
 import { LoginResponse, LoginUser, IUser } from "../types/User";
 import getTokenUser from "../utils/getUserData";
@@ -71,7 +74,13 @@ const useUser = () => {
     },
     [dispatch, navigate]
   );
-  return { signUp, logIn };
+  const logOut = () => {
+    localStorage.clear();
+    dispatch(logOutActionCreator());
+    navigate("/");
+  };
+
+  return { signUp, logIn, logOut };
 };
 
 export default useUser;
