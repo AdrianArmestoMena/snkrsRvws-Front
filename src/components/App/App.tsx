@@ -1,27 +1,22 @@
 import React, { useEffect } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import styledMainTheme from "../../stylesUtils/styledMainTheme";
 import Header from "../Header/Header";
 import Login from "../LogIn/LogIn";
 import ModalError from "../Modal/ModalError";
 import SignUp from "../SignUp/SignUp";
 import "./App.css";
-import jwtDecode from "jwt-decode";
-import { loginActionCreator } from "../../store/features/users/usersSlice";
-import { UserToken } from "../../types/User";
+
+import useStorage from "../../hooks/useStorage";
+import { useAppSelector } from "../../store/hooks";
 
 const App = () => {
-  const token = localStorage.getItem("token") as string;
-  const dispatch = useAppDispatch();
+  const { getToken } = useStorage();
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      const user: UserToken = jwtDecode(token);
-      dispatch(loginActionCreator(user));
-    }
-  }, [dispatch, token]);
+    getToken();
+  }, [getToken]);
 
   const {
     isLoading,

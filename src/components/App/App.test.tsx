@@ -1,7 +1,8 @@
+import { act } from "react-dom/test-utils";
 import { UiModal } from "../../store/features/uiModal/model/uiModal";
-
+import { loginActionCreator } from "../../store/features/users/usersSlice";
 import mockLocalStorage from "../../test-utils/mocks/localStorageMock";
-import { screen, wrappedRender } from "../../test-utils/WrappedRender";
+import { screen, waitFor, wrappedRender } from "../../test-utils/WrappedRender";
 import App from "./App";
 
 let mockAppSelector: UiModal = {
@@ -32,12 +33,6 @@ jest.mock("../../store/hooks", () => ({
   ...jest.requireActual("../../store/hooks"),
   useAppSelector: () => mockAppSelector,
 }));
-
-Object.defineProperty(window, "localStorage", {
-  value: mockLocalStorage,
-});
-
-mockLocalStorage.setItem("token", "q2345");
 
 describe("Given an App component", () => {
   beforeEach(() => jest.clearAllMocks());
