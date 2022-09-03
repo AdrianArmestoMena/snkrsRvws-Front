@@ -8,9 +8,6 @@ const mockLocalStorage = (() => {
     setItem(key: string, value: string) {
       store[key] = value.toString();
     },
-    clear() {
-      store = {};
-    },
   };
 })();
 
