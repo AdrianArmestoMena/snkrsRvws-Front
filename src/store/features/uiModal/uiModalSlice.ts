@@ -30,6 +30,14 @@ export const uiModalsSlice = createSlice({
         type: "error",
       },
     }),
+    closeAll: (state: UiModal) => ({
+      isLoading: false,
+      modal: {
+        isOpen: false,
+        text: "",
+        type: "",
+      },
+    }),
   },
 });
 
@@ -39,6 +47,7 @@ export const {
   loading: loadingUiActionCreator,
   closeLoading: closeLoadingActionCreator,
   throwMessageError: throwMessageErrorActionCreator,
+  closeAll: closeAllActionCreator,
 } = uiModalsSlice.actions;
 
 export const uiModalReducer = uiModalsSlice.reducer;
