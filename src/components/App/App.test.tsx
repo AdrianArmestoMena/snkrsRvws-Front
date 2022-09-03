@@ -1,4 +1,6 @@
 import { UiModal } from "../../store/features/uiModal/model/uiModal";
+
+import mockLocalStorage from "../../test-utils/mocks/localStorageMock";
 import { screen, wrappedRender } from "../../test-utils/WrappedRender";
 import App from "./App";
 
@@ -10,11 +12,32 @@ let mockAppSelector: UiModal = {
     type: "error",
   },
 };
+const mockDispatch = jest.fn();
+
+jest.mock("../../store/hooks", () => ({
+  ...jest.requireActual("../../store/hooks"),
+  useAppSelector: () => mockAppSelector,
+  useAppDispatch: () => mockDispatch,
+}));
+
+jest.mock("../../store/features/users/usersSlice", () => ({
+  ...jest.requireActual("../../store/features/users/usersSlice"),
+  loginActionCreator: () => jest.fn(),
+}));
+
+const mockJwt = jest.fn();
+jest.mock("jwt-decode", () => () => mockJwt);
 
 jest.mock("../../store/hooks", () => ({
   ...jest.requireActual("../../store/hooks"),
   useAppSelector: () => mockAppSelector,
 }));
+
+Object.defineProperty(window, "localStorage", {
+  value: mockLocalStorage,
+});
+
+mockLocalStorage.setItem("token", "q2345");
 
 describe("Given an App component", () => {
   beforeEach(() => jest.clearAllMocks());
