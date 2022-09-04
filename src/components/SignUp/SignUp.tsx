@@ -4,7 +4,7 @@ import { ILoginState } from "../../types/User";
 import { paswordsChecker } from "../../utils/formsCheckers";
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-import SignUpStyle from "./SignUp.style";
+import Formstyle from "../../stylesUtils/Forms.style";
 
 const SignUp = (): JSX.Element => {
   const initialState: ILoginState = {
@@ -42,7 +42,7 @@ const SignUp = (): JSX.Element => {
   };
 
   return (
-    <SignUpStyle>
+    <Formstyle>
       <h2 className="action-call">
         Join the {<span className="action-call__outstanding">SnkrsRvws</span>}{" "}
         community
@@ -122,7 +122,7 @@ const SignUp = (): JSX.Element => {
           Sign up
         </Button>
       </Form>
-    </SignUpStyle>
+    </Formstyle>
   );
 };
 
