@@ -46,6 +46,8 @@ const HeaderStyle = styled.header`
       color: ${(props) => props.theme.lightGreen};
       text-decoration: none;
       height: 100%;
+      border: none;
+      background-color: transparent;
     }
     &-links:hover {
       text-decoration: underline;

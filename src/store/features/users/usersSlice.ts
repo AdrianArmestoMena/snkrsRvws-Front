@@ -11,11 +11,13 @@ export const usersSlice = createSlice({
   initialState,
   reducers: {
     logIn: (state, action: PayloadAction<User>) => action.payload,
+    logOut: () => initialState,
   },
 });
 
 export const usersReducer = usersSlice.reducer;
 
-export const { logIn: loginActionCreator } = usersSlice.actions;
+export const { logIn: loginActionCreator, logOut: logOutActionCreator } =
+  usersSlice.actions;
 
 export const loginReducer = usersSlice.reducer;
