@@ -51,7 +51,11 @@ const Header = (): JSX.Element => {
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink to="/" className="nav-links" onClick={Close}>
+                  <NavLink
+                    to="/createreview"
+                    className="nav-links"
+                    onClick={Close}
+                  >
                     Create Review
                   </NavLink>
                 </li>
