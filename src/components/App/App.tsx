@@ -10,7 +10,7 @@ import "./App.css";
 
 import useStorage from "../../hooks/useStorage";
 import { useAppSelector } from "../../store/hooks";
-import ReviewFrom from "../ReviewFrom/ReviewFrom";
+import ReviewForm from "../ReviewFrom/ReviewForm";
 
 const App = () => {
   const { getToken } = useStorage();
@@ -33,7 +33,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/createreview" element={<ReviewFrom />} />
+          <Route path="/createreview" element={<ReviewForm />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<SignUp />} />
         </Routes>
