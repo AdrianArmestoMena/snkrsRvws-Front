@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import useUser from "../../hooks/useUser";
+import Formstyle from "../../stylesUtils/Forms.style";
 import { LoginUser } from "../../types/User";
-import LoginStyle from "./Login.style";
 
 const Login = (): JSX.Element => {
   const initialState: LoginUser = {
@@ -37,7 +37,7 @@ const Login = (): JSX.Element => {
   };
 
   return (
-    <LoginStyle>
+    <Formstyle>
       <h2 className="action-call">
         Join the {<span className="action-call__outstanding">SnkrsRvws</span>}{" "}
         community
@@ -86,7 +86,7 @@ const Login = (): JSX.Element => {
           Login
         </Button>
       </Form>
-    </LoginStyle>
+    </Formstyle>
   );
 };
 

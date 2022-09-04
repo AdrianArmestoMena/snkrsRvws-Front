@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import LoginStyle from "../LogIn/Login.style";
+import Formstyle from "../../stylesUtils/Forms.style";
 
 const ReviewFrom = (): JSX.Element => {
   const [validated, setValidated] = useState(true);
   return (
-    <LoginStyle>
+    <Formstyle>
       <Form noValidate validated={validated} className="form">
         <Form.Group className="mb-3" controlId="Name">
           <Form.Label>Brand</Form.Label>
@@ -41,7 +41,7 @@ const ReviewFrom = (): JSX.Element => {
           Craete Review
         </Button>
       </Form>
-    </LoginStyle>
+    </Formstyle>
   );
 };
 
