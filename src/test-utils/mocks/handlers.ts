@@ -34,6 +34,30 @@ const handlers = [
       })
     );
   }),
+
+  rest.post(`${apiUrl}/reviews/addreview`, async (req, res, ctx) => {
+    const request: any = await req;
+    const formData: any = await request._body.get("review");
+    const review = JSON.parse(formData);
+
+    const status = review.brand === "" ? 400 : 200;
+
+    return res(
+      ctx.status(status),
+      ctx.json({
+        newReview: {
+          brand: "nike",
+          model: "jordan11",
+          picture: "uploads\\b1c7cbcb713f5c58adfb155d8640088d",
+          review: "Nice shoes",
+          owner: "630e5e99bd6d5f91b999517b",
+          likes: [],
+          comments: [],
+          id: "63149166440acde4125bf0f8",
+        },
+      })
+    );
+  }),
 ];
 
 export default handlers;
