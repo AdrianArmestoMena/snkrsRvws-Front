@@ -1,12 +1,10 @@
-import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import Formstyle from "../../stylesUtils/Forms.style";
 
 const ReviewFrom = (): JSX.Element => {
-  const [validated, setValidated] = useState(true);
   return (
     <Formstyle>
-      <Form noValidate validated={validated} className="form">
+      <Form noValidate validated={false} className="form">
         <Form.Group className="mb-3" controlId="Name">
           <Form.Label>Brand</Form.Label>
           <Form.Control
