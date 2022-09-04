@@ -30,7 +30,7 @@ const App = () => {
         {isLoading && <ModalError type="" text="Loading..." />}
         {isOpen && <ModalError type={type} text={text} />}
         <Routes>
-          <Route path="/" element={<Navigate to="/signup" />} />
+          <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<SignUp />} />
