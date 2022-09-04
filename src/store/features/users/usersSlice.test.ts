@@ -1,5 +1,9 @@
 import { User } from "./model/User";
-import { loginActionCreator, usersReducer } from "./usersSlice";
+import {
+  loginActionCreator,
+  logOutActionCreator,
+  usersReducer,
+} from "./usersSlice";
 
 describe("Given a users reducer function", () => {
   const initialState: User = {
@@ -30,9 +34,9 @@ describe("Given a users reducer function", () => {
 
   describe("When it is called with an logout action", () => {
     test("Then it should return the initial state", () => {
-      const unknownAction = { type: "logout" };
+      const actualUser = usersReducer(undefined, logOutActionCreator());
 
-      expect(usersReducer(undefined, unknownAction)).toEqual(initialState);
+      expect(actualUser).toEqual(initialState);
     });
   });
 });

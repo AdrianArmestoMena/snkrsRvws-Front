@@ -5,20 +5,11 @@ import { UserToken } from "../types/User";
 import useStorage from "./useStorage";
 
 const mockUseDispatch = jest.fn();
-const mockThrowError = "";
 
 jest.mock("../store/hooks", () => ({
   ...jest.requireActual("../store/hooks"),
   useAppDispatch: () => mockUseDispatch,
 }));
-
-jest.mock("../store/features/uiModal/uiModalSlice", () => ({
-  ...jest.requireActual("../store/features/uiModal/uiModalSlice"),
-  throwMessageErrorActionCreator: () => mockThrowError,
-}));
-
-const mockGetToken = jest.fn();
-jest.mock("../utils/getUserData", () => () => mockGetToken);
 
 jest.mock("../store/features/users/usersSlice", () => ({
   ...jest.requireActual("../store/features/users/usersSlice"),
