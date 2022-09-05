@@ -1,18 +1,21 @@
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { useNavigate } from "react-router-dom";
+import { loadReviewsActionCreator } from "../store/features/reviews/reviewsSlice";
 import {
   closeAllActionCreator,
   closeLoadingActionCreator,
   loadingUiActionCreator,
   throwMessageErrorActionCreator,
 } from "../store/features/uiModal/uiModalSlice";
-import { useAppDispatch } from "../store/hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { ReviewsResponse } from "../types/Review";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const useReviews = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const user = useAppSelector((state) => state.users);
 
   const createReview = async (formData: FormData) => {
     let response;
@@ -35,7 +38,33 @@ const useReviews = () => {
     dispatch(closeAllActionCreator());
     return response.data;
   };
-  return { createReview };
+
+  const loadReviewsByOwner = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      dispatch(loadingUiActionCreator());
+      const {
+        data: { reviews },
+      }: AxiosResponse<ReviewsResponse> = await axios.get(
+        `${apiUrl}/reviews/${user.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(loadReviewsActionCreator(reviews));
+    } catch (error) {
+      const errorObject = JSON.parse((error as AxiosError).request.response);
+      dispatch(closeLoadingActionCreator());
+      dispatch(throwMessageErrorActionCreator(errorObject.error));
+      return false;
+    }
+    navigate("/");
+    dispatch(closeAllActionCreator());
+    return true;
+  };
+  return { createReview, loadReviewsByOwner };
 };
 
 export default useReviews;
