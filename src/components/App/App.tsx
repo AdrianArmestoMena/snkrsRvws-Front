@@ -3,14 +3,15 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import styledMainTheme from "../../stylesUtils/styledMainTheme";
 import Header from "../Header/Header";
-import Login from "../LogIn/LogIn";
 import ModalError from "../Modal/ModalError";
 import SignUp from "../SignUp/SignUp";
 import "./App.css";
 
 import useStorage from "../../hooks/useStorage";
 import { useAppSelector } from "../../store/hooks";
-import ReviewForm from "../ReviewFrom/ReviewForm";
+import LoginPage from "../../pages/LoginPage/LoginPage";
+import SignupPage from "../../pages/SignupPage/SignupPage";
+import ReviewFormPage from "../../pages/ReviewFormPage/ReviewFormPage";
 
 const App = () => {
   const { getToken } = useStorage();
@@ -32,9 +33,9 @@ const App = () => {
         {isOpen && <ModalError type={type} text={text} />}
         <Routes>
           <Route path="/" element={<Navigate to="/login" />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/createreview" element={<ReviewForm />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/createreview" element={<ReviewFormPage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="*" element={<SignUp />} />
         </Routes>
       </div>
