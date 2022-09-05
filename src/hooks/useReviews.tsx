@@ -16,10 +16,14 @@ const useReviews = () => {
 
   const createReview = async (formData: FormData) => {
     let response;
+    const token = localStorage.getItem("token");
     try {
       dispatch(loadingUiActionCreator());
       response = await axios.post(`${apiUrl}/reviews/addreview`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
       });
     } catch (error) {
       const errorObject = JSON.parse((error as AxiosError).request.response);
