@@ -4,9 +4,7 @@ import { ThemeProvider } from "styled-components";
 import styledMainTheme from "../../stylesUtils/styledMainTheme";
 import Header from "../Header/Header";
 import ModalError from "../Modal/ModalError";
-import SignUp from "../SignUp/SignUp";
 import "./App.css";
-
 import useStorage from "../../hooks/useStorage";
 import { useAppSelector } from "../../store/hooks";
 import LoginPage from "../../pages/LoginPage/LoginPage";
@@ -34,9 +32,9 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/signup" element={<SignupPage />} />
-          <Route path="/createreview" element={<ReviewFormPage />} />
+          <Route path="/create-review" element={<ReviewFormPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="*" element={<SignUp />} />
+          <Route path="*" element={<SignupPage />} />
         </Routes>
       </div>
     </ThemeProvider>
