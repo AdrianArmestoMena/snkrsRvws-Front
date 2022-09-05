@@ -1,9 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Given a review form Page component When it's instantiated Then it should match the html from Home page 1`] = `
+exports[`Given a singup form Page component When it's instantiated Then it should match the html from Home page 1`] = `
 <main
   className="sc-bczRLJ kbzsDj"
 >
+  <h2
+    className="action-call"
+  >
+    Join the 
+    <span
+      className="action-call__outstanding"
+    >
+      SnkrsRvws
+    </span>
+     
+    community
+  </h2>
   <form
     className="form"
     noValidate={true}
@@ -16,18 +28,48 @@ exports[`Given a review form Page component When it's instantiated Then it shoul
         className="form-label"
         htmlFor="Name"
       >
-        Brand
+        User Name
       </label>
       <input
         className="form-control"
         id="Name"
-        name="brand"
+        name="userName"
         onChange={[Function]}
-        placeholder="Nike, Adidas, Jordan..."
+        placeholder="Enter your name"
         required={true}
         type="text"
         value=""
       />
+      <div
+        className="invalid-feedback"
+      >
+        Please choose a username.
+      </div>
+    </div>
+    <div
+      className="mb-3"
+    >
+      <label
+        className="form-label"
+        htmlFor="Email"
+      >
+        Email
+      </label>
+      <input
+        className="form-control"
+        id="Email"
+        name="email"
+        onChange={[Function]}
+        placeholder="Enter your email"
+        required={true}
+        type="email"
+        value=""
+      />
+      <div
+        className="invalid-feedback"
+      >
+        Please provide a valid email.
+      </div>
     </div>
     <div
       className="mb-3"
@@ -36,61 +78,55 @@ exports[`Given a review form Page component When it's instantiated Then it shoul
         className="form-label"
         htmlFor="Pasword"
       >
-        Model
+        Password
       </label>
       <input
         className="form-control"
         id="Pasword"
-        name="model"
+        name="password"
         onChange={[Function]}
-        placeholder="Jordan 11, jordan 1 low travis scoot, etc"
+        placeholder="Password"
         required={true}
-        type="text"
+        type="password"
         value=""
       />
+      <div
+        className="invalid-feedback"
+      >
+        Please provide a password.
+      </div>
     </div>
     <div
       className="mb-3"
     >
       <label
         className="form-label"
-        htmlFor="Picture"
+        htmlFor="PasswordR"
       >
-        Kick's picture
+        Repeat password
       </label>
       <input
         className="form-control"
-        id="Picture"
-        name="picture"
+        id="PasswordR"
+        name="passwordRepeat"
         onChange={[Function]}
-        type="file"
-      />
-    </div>
-    <div
-      className="mb-3"
-    >
-      <label
-        className="form-label"
-        htmlFor="exampleForm.ControlTextarea1"
-      >
-        Your review
-      </label>
-      <textarea
-        className="form-control"
-        id="exampleForm.ControlTextarea1"
-        name="review"
-        onChange={[Function]}
+        placeholder="Repeat your password"
         required={true}
-        rows={3}
+        type="password"
         value=""
       />
+      <div
+        className="invalid-feedback"
+      >
+        Different passswords
+      </div>
     </div>
     <button
       className="col mt-4 btn btn-primary form__button btn btn-primary"
       disabled={false}
       type="submit"
     >
-      Craete Review
+      Sign up
     </button>
   </form>
 </main>
