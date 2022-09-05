@@ -36,7 +36,7 @@ const ReviewForm = (): JSX.Element => {
   };
 
   const onChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
-    formData.append("picture", event.target.files![0]);
+    formData.append("image", event.target.files![0]);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
