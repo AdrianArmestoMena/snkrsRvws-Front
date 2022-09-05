@@ -69,7 +69,7 @@ const useUser = () => {
         return false;
       }
 
-      navigate("/");
+      navigate("/create-review");
       dispatch(closeAllActionCreator());
 
       return true;
