@@ -32,6 +32,7 @@ const useUser = () => {
     } catch (error) {
       const errorObject = JSON.parse((error as AxiosError).request.response);
       dispatch(closeLoadingActionCreator());
+      setTimeout(() => dispatch(closeAllActionCreator()), 3000);
       dispatch(throwMessageErrorActionCreator(errorObject.error));
       return false;
     }
@@ -63,6 +64,7 @@ const useUser = () => {
       } catch (error) {
         const errorObject = JSON.parse((error as AxiosError).request.response);
         dispatch(closeLoadingActionCreator());
+        setTimeout(() => dispatch(closeAllActionCreator()), 3000);
         dispatch(throwMessageErrorActionCreator(errorObject.error));
         return false;
       }
