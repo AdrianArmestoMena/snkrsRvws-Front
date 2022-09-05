@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given a review form Page component When it's instantiated Then it should match the html from Home page 1`] = `
+<main
+  className="sc-bczRLJ kbzsDj"
+>
+  <form
+    className="form"
+    noValidate={true}
+    onSubmit={[Function]}
+  >
+    <div
+      className="mb-3"
+    >
+      <label
+        className="form-label"
+        htmlFor="Name"
+      >
+        Brand
+      </label>
+      <input
+        className="form-control"
+        id="Name"
+        name="brand"
+        onChange={[Function]}
+        placeholder="Nike, Adidas, Jordan..."
+        required={true}
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      className="mb-3"
+    >
+      <label
+        className="form-label"
+        htmlFor="Pasword"
+      >
+        Model
+      </label>
+      <input
+        className="form-control"
+        id="Pasword"
+        name="model"
+        onChange={[Function]}
+        placeholder="Jordan 11, jordan 1 low travis scoot, etc"
+        required={true}
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      className="mb-3"
+    >
+      <label
+        className="form-label"
+        htmlFor="Picture"
+      >
+        Kick's picture
+      </label>
+      <input
+        className="form-control"
+        id="Picture"
+        name="picture"
+        onChange={[Function]}
+        type="file"
+      />
+    </div>
+    <div
+      className="mb-3"
+    >
+      <label
+        className="form-label"
+        htmlFor="exampleForm.ControlTextarea1"
+      >
+        Your review
+      </label>
+      <textarea
+        className="form-control"
+        id="exampleForm.ControlTextarea1"
+        name="review"
+        onChange={[Function]}
+        required={true}
+        rows={3}
+        value=""
+      />
+    </div>
+    <button
+      className="col mt-4 btn btn-primary form__button btn btn-primary"
+      disabled={false}
+      type="submit"
+    >
+      Craete Review
+    </button>
+  </form>
+</main>
+`;

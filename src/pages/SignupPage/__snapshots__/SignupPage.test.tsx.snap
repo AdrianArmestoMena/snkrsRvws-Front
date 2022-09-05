@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given a singup form Page component When it's instantiated Then it should match the html from Home page 1`] = `
+<main
+  className="sc-bczRLJ kbzsDj"
+>
+  <h2
+    className="action-call"
+  >
+    Join the 
+    <span
+      className="action-call__outstanding"
+    >
+      SnkrsRvws
+    </span>
+     
+    community
+  </h2>
+  <form
+    className="form"
+    noValidate={true}
+    onSubmit={[Function]}
+  >
+    <div
+      className="mb-3"
+    >
+      <label
+        className="form-label"
+        htmlFor="Name"
+      >
+        User Name
+      </label>
+      <input
+        className="form-control"
+        id="Name"
+        name="userName"
+        onChange={[Function]}
+        placeholder="Enter your name"
+        required={true}
+        type="text"
+        value=""
+      />
+      <div
+        className="invalid-feedback"
+      >
+        Please choose a username.
+      </div>
+    </div>
+    <div
+      className="mb-3"
+    >
+      <label
+        className="form-label"
+        htmlFor="Email"
+      >
+        Email
+      </label>
+      <input
+        className="form-control"
+        id="Email"
+        name="email"
+        onChange={[Function]}
+        placeholder="Enter your email"
+        required={true}
+        type="email"
+        value=""
+      />
+      <div
+        className="invalid-feedback"
+      >
+        Please provide a valid email.
+      </div>
+    </div>
+    <div
+      className="mb-3"
+    >
+      <label
+        className="form-label"
+        htmlFor="Pasword"
+      >
+        Password
+      </label>
+      <input
+        className="form-control"
+        id="Pasword"
+        name="password"
+        onChange={[Function]}
+        placeholder="Password"
+        required={true}
+        type="password"
+        value=""
+      />
+      <div
+        className="invalid-feedback"
+      >
+        Please provide a password.
+      </div>
+    </div>
+    <div
+      className="mb-3"
+    >
+      <label
+        className="form-label"
+        htmlFor="PasswordR"
+      >
+        Repeat password
+      </label>
+      <input
+        className="form-control"
+        id="PasswordR"
+        name="passwordRepeat"
+        onChange={[Function]}
+        placeholder="Repeat your password"
+        required={true}
+        type="password"
+        value=""
+      />
+      <div
+        className="invalid-feedback"
+      >
+        Different passswords
+      </div>
+    </div>
+    <button
+      className="col mt-4 btn btn-primary form__button btn btn-primary"
+      disabled={false}
+      type="submit"
+    >
+      Sign up
+    </button>
+  </form>
+</main>
+`;

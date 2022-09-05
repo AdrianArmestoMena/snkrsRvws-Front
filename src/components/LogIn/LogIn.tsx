@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import useUser from "../../hooks/useUser";
-import Formstyle from "../../stylesUtils/Forms.style";
 import { LoginUser } from "../../types/User";
 
 const Login = (): JSX.Element => {
@@ -37,56 +36,50 @@ const Login = (): JSX.Element => {
   };
 
   return (
-    <Formstyle>
-      <h2 className="action-call">
-        Join the {<span className="action-call__outstanding">SnkrsRvws</span>}{" "}
-        community
-      </h2>
-      <Form
-        noValidate
-        validated={validated}
-        onSubmit={(event) => {
-          handleClick(event);
-        }}
-        className="form"
+    <Form
+      noValidate
+      validated={validated}
+      onSubmit={(event) => {
+        handleClick(event);
+      }}
+      className="form"
+    >
+      <Form.Group className="mb-3" controlId="Name">
+        <Form.Label>User Name</Form.Label>
+        <Form.Control
+          name="userName"
+          onChange={handleChange}
+          value={user.userName}
+          type="text"
+          placeholder="Enter your name"
+          required
+        />
+        <Form.Control.Feedback type="invalid">
+          Please choose a username.
+        </Form.Control.Feedback>
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="Pasword">
+        <Form.Label>Password</Form.Label>
+        <Form.Control
+          required
+          name="password"
+          type="password"
+          placeholder="Password"
+          onChange={handleChange}
+          value={user.password}
+        />
+        <Form.Control.Feedback type="invalid">
+          Please provide a password.
+        </Form.Control.Feedback>
+      </Form.Group>
+      <Button
+        className="col mt-4 btn btn-primary form__button"
+        variant="primary"
+        type="submit"
       >
-        <Form.Group className="mb-3" controlId="Name">
-          <Form.Label>User Name</Form.Label>
-          <Form.Control
-            name="userName"
-            onChange={handleChange}
-            value={user.userName}
-            type="text"
-            placeholder="Enter your name"
-            required
-          />
-          <Form.Control.Feedback type="invalid">
-            Please choose a username.
-          </Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="Pasword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            required
-            name="password"
-            type="password"
-            placeholder="Password"
-            onChange={handleChange}
-            value={user.password}
-          />
-          <Form.Control.Feedback type="invalid">
-            Please provide a password.
-          </Form.Control.Feedback>
-        </Form.Group>
-        <Button
-          className="col mt-4 btn btn-primary form__button"
-          variant="primary"
-          type="submit"
-        >
-          Login
-        </Button>
-      </Form>
-    </Formstyle>
+        Login
+      </Button>
+    </Form>
   );
 };
 

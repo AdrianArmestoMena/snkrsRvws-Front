@@ -12,16 +12,6 @@ jest.mock("../../hooks/useUser", () => () => mockUseUsers);
 
 describe("Given a FormRegister function", () => {
   describe("When it is called", () => {
-    test("Then it should show a h2 with Join to hte snkrsrvws community", async () => {
-      wrappedRender(<Login />);
-
-      const heading = screen.getByRole("heading", {
-        name: "Join the SnkrsRvws community",
-      });
-
-      expect(heading).toBeInTheDocument();
-    });
-
     test("And if the user click on the Submit button it should call login function", async () => {
       const users = {
         userName: "Adrian",
