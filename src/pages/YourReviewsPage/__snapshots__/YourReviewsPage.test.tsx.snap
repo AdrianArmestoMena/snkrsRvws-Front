@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given a your reviews page function When it's instantiated Then it should match the html from your reviews page 1`] = `
+<main
+  className="sc-dkzDqf dQPlig"
+>
+  <h2
+    className="tittle"
+  >
+    Your Reviews
+  </h2>
+  <ul
+    className="sc-gsnTZi iexXHi"
+  >
+    <li
+      className="sc-bczRLJ ddHTcZ review"
+    >
+      <div
+        className="review__mian-container"
+      >
+        <div
+          className="review__title-container"
+        >
+          <div
+            className="review__title-athor"
+          >
+            <h2
+              className="review__title"
+            >
+               
+            </h2>
+            <span
+              className="review__author"
+            >
+              by 
+            </span>
+          </div>
+          <svg
+            aria-hidden="true"
+            className="svg-inline--fa fa-xmark review__icon"
+            data-icon="xmark"
+            data-prefix="fas"
+            focusable="false"
+            role="img"
+            style={Object {}}
+            viewBox="0 0 320 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"
+              fill="currentColor"
+              style={Object {}}
+            />
+          </svg>
+        </div>
+        <div
+          className="review__image-container"
+        >
+          <img
+            alt="bamba"
+            className="review__image"
+            src="http://localhost:4000/"
+            width={500}
+          />
+        </div>
+        <div
+          className="review__buttons-container"
+        >
+          <button
+            className="review__button review__view-button btn btn-primary"
+            disabled={false}
+            type="button"
+          >
+            View Review
+          </button>
+          <button
+            className="review__button review__delete-button btn btn-primary"
+            disabled={false}
+            type="button"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+      <p
+        className="review__review"
+      />
+    </li>
+  </ul>
+</main>
+`;
