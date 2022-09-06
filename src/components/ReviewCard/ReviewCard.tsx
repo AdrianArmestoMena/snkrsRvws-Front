@@ -32,7 +32,7 @@ const ReviewCard = ({
           <img
             className="review__image"
             width={500}
-            src={picture}
+            src={`${process.env.REACT_APP_API_URL}/${picture}`}
             alt="bamba"
           />
         </div>
