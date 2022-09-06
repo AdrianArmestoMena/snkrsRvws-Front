@@ -26,7 +26,7 @@ const Header = (): JSX.Element => {
           </NavLink>
           <ul className={click ? "nav-menu active" : "nav-menu"}>
             <li className="nav-item">
-              <NavLink to="/login" className="nav-links" onClick={Close}>
+              <NavLink to="/home" className="nav-links" onClick={Close}>
                 Home
               </NavLink>
             </li>

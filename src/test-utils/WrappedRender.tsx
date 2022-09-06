@@ -1,8 +1,7 @@
 import { render } from "@testing-library/react";
 import Wrapper from "./Wrapper";
 
-const wrappedRender = (view: JSX.Element, ...options: any) =>
-  render(view, { wrapper: Wrapper, ...options });
+const wrappedRender = (view: JSX.Element) => render(view, { wrapper: Wrapper });
 
 export * from "@testing-library/react";
 

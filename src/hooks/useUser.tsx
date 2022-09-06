@@ -21,7 +21,7 @@ const useUser = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const signUp = async ({ userName, password, email }: IUser) => {
-    let response: AxiosResponse<any>;
+    let response: AxiosResponse;
     try {
       dispatch(loadingUiActionCreator());
       response = await axios.post(`${apiUrl}/users/signup`, {
