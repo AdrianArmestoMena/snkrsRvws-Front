@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
+import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { loadReviewsActionCreator } from "../store/features/reviews/reviewsSlice";
 import {
@@ -39,7 +40,7 @@ const useReviews = () => {
     return response.data;
   };
 
-  const loadReviewsByOwner = async () => {
+  const loadReviewsByOwner = useCallback(async () => {
     const token = localStorage.getItem("token");
     try {
       dispatch(loadingUiActionCreator());
@@ -53,6 +54,7 @@ const useReviews = () => {
           },
         }
       );
+
       dispatch(loadReviewsActionCreator(reviews));
     } catch (error) {
       const errorObject = JSON.parse((error as AxiosError).request.response);
@@ -60,10 +62,10 @@ const useReviews = () => {
       dispatch(throwMessageErrorActionCreator(errorObject.error));
       return false;
     }
-    navigate("/");
     dispatch(closeAllActionCreator());
     return true;
-  };
+  }, [dispatch, user.id]);
+
   return { createReview, loadReviewsByOwner };
 };
 
