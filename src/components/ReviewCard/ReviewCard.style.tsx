@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const ReviewCardStyle = styled.article`
+const ReviewCardStyle = styled.li`
   border: 2px solid black;
   border-radius: 20px;
   padding: 10px;
@@ -41,6 +41,7 @@ const ReviewCardStyle = styled.article`
       color: ${(props) => props.theme.errorBorderColor};
     }
     &__image {
+      border-radius: 10px;
       max-width: 100%;
     }
     &__buttons-container {
@@ -57,6 +58,8 @@ const ReviewCardStyle = styled.article`
       border-radius: 120px;
       width: 45%;
       height: 50px;
+      margin: 10px;
+      min-width: 150px;
     }
     &__view-button {
       align-self: flex-start;
