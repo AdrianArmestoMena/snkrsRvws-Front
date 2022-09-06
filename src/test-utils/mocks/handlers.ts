@@ -37,7 +37,7 @@ const handlers = [
 
   rest.post(`${apiUrl}/reviews/addreview`, async (req, res, ctx) => {
     const request: any = await req;
-    const formData: any = await request._body.get("review");
+    const formData: string = await request._body.get("review");
     const review = JSON.parse(formData);
 
     const status = review.brand === "" ? 400 : 200;
