@@ -10,6 +10,7 @@ import { useAppSelector } from "../../store/hooks";
 import LoginPage from "../../pages/LoginPage/LoginPage";
 import SignupPage from "../../pages/SignupPage/SignupPage";
 import ReviewFormPage from "../../pages/ReviewFormPage/ReviewFormPage";
+import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
 
 const App = () => {
   const { getToken } = useStorage();
@@ -34,7 +35,7 @@ const App = () => {
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/create-review" element={<ReviewFormPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="*" element={<SignupPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
     </ThemeProvider>
