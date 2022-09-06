@@ -59,7 +59,7 @@ exports[`Given a your reviews page function When it's instantiated Then it shoul
           <img
             alt="bamba"
             className="review__image"
-            src="http://localhost:4000/"
+            src="https://aarmesto-final-project-202207.herokuapp.com/"
             width={500}
           />
         </div>
