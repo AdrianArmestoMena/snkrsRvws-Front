@@ -26,9 +26,8 @@ const ReviewCardStyle = styled.li`
       padding-bottom: 50px;
     }
     &__image-container {
-      height: 50%;
-      width: 100%;
       border-radius: 10px;
+      height: auto;
     }
     &__icon {
       width: 40px;
@@ -43,6 +42,7 @@ const ReviewCardStyle = styled.li`
     &__image {
       border-radius: 10px;
       max-width: 100%;
+      max-height: 100%;
     }
     &__buttons-container {
       display: flex;

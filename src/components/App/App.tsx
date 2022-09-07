@@ -11,7 +11,7 @@ import LoginPage from "../../pages/LoginPage/LoginPage";
 import SignupPage from "../../pages/SignupPage/SignupPage";
 import ReviewFormPage from "../../pages/ReviewFormPage/ReviewFormPage";
 import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
-import ReviewsList from "../ReviewsList/ReviewsList";
+import YourReviewsPage from "../../pages/YourReviewsPage/YourReviewsPage";
 
 const App = () => {
   const { getToken } = useStorage();
@@ -35,7 +35,7 @@ const App = () => {
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/create-review" element={<ReviewFormPage />} />
-          <Route path="/your-reviews" element={<ReviewsList />} />
+          <Route path="/your-reviews" element={<YourReviewsPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
