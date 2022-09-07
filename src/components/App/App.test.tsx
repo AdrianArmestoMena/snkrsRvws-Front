@@ -1,11 +1,7 @@
-import { act } from "react-dom/test-utils";
-import { UiModal } from "../../store/features/uiModal/model/uiModal";
-import { loginActionCreator } from "../../store/features/users/usersSlice";
-import mockLocalStorage from "../../test-utils/mocks/localStorageMock";
-import { screen, waitFor, wrappedRender } from "../../test-utils/WrappedRender";
+import { screen, wrappedRender } from "../../test-utils/WrappedRender";
 import App from "./App";
 
-let mockAppSelector: UiModal = {
+let mockAppSelector = {
   isLoading: false,
   modal: {
     isOpen: true,
@@ -13,7 +9,9 @@ let mockAppSelector: UiModal = {
     type: "error",
   },
 };
+
 const mockDispatch = jest.fn();
+jest.mock("../../pages/YourReviewsPage/YourReviewsPage", () => () => jest.fn());
 
 jest.mock("../../store/hooks", () => ({
   ...jest.requireActual("../../store/hooks"),
@@ -28,11 +26,6 @@ jest.mock("../../store/features/users/usersSlice", () => ({
 
 const mockJwt = jest.fn();
 jest.mock("jwt-decode", () => () => mockJwt);
-
-jest.mock("../../store/hooks", () => ({
-  ...jest.requireActual("../../store/hooks"),
-  useAppSelector: () => mockAppSelector,
-}));
 
 describe("Given an App component", () => {
   beforeEach(() => jest.clearAllMocks());
