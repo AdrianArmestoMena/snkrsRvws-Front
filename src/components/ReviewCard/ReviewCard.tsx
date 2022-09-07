@@ -1,6 +1,7 @@
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "react-bootstrap";
+import useReviews from "../../hooks/useReviews";
 import ReviewCardStyle from "./ReviewCard.style";
 
 interface ReviewCardProps {
@@ -9,6 +10,7 @@ interface ReviewCardProps {
   owner: string;
   review: string;
   picture: string;
+  id: string;
 }
 
 const ReviewCard = ({
@@ -17,7 +19,14 @@ const ReviewCard = ({
   owner,
   review,
   picture,
+  id,
 }: ReviewCardProps): JSX.Element => {
+  const { deleteReview } = useReviews();
+
+  const deleteAction = () => {
+    deleteReview(id);
+  };
+
   return (
     <ReviewCardStyle className="review">
       <div className="review__mian-container">
@@ -26,7 +35,9 @@ const ReviewCard = ({
             <h2 className="review__title">{`${brand} ${model}`}</h2>
             <span className="review__author">{`by ${owner}`}</span>
           </div>
-          <FontAwesomeIcon className="review__icon" icon={faXmark} />
+          <button className="review__icon" onClick={deleteAction}>
+            <FontAwesomeIcon className="review__icon" icon={faXmark} />
+          </button>
         </div>
         <div className="review__image-container">
           <img
@@ -40,7 +51,10 @@ const ReviewCard = ({
           <Button className="review__button review__view-button">
             View Review
           </Button>
-          <Button className="review__button review__delete-button">
+          <Button
+            onClick={deleteAction}
+            className="review__button review__delete-button"
+          >
             Delete
           </Button>
         </div>

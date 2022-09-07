@@ -76,6 +76,7 @@ const useReviews = () => {
             Authorization: `Bearer ${token}`,
           },
         });
+        loadReviewsByOwner();
       } catch (error) {
         const errorObject = JSON.parse((error as AxiosError).request.response);
         dispatch(closeLoadingActionCreator());
@@ -85,7 +86,7 @@ const useReviews = () => {
       dispatch(closeAllActionCreator());
       return true;
     },
-    [dispatch]
+    [dispatch, loadReviewsByOwner]
   );
 
   return { createReview, loadReviewsByOwner, deleteReview };

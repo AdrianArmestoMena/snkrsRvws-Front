@@ -3,7 +3,7 @@ import { Button, Form } from "react-bootstrap";
 import useReviews from "../../hooks/useReviews";
 import { useAppSelector } from "../../store/hooks";
 
-const formData = new FormData();
+let formData = new FormData();
 
 const ReviewForm = (): JSX.Element => {
   const { id } = useAppSelector((state) => state.users);
@@ -30,6 +30,7 @@ const ReviewForm = (): JSX.Element => {
       event.preventDefault();
       formData.append("review", JSON.stringify({ ...review, owner: id }));
       await createReview(formData);
+      formData = new FormData();
       setReview(initialState);
       setValidated(false);
     }

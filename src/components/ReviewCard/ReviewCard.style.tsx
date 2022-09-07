@@ -32,6 +32,11 @@ const ReviewCardStyle = styled.li`
     &__icon {
       width: 40px;
       height: 40px;
+      background-color: white;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       @media (min-width: 900px) {
         display: none;
       }
