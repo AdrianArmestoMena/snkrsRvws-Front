@@ -35,11 +35,9 @@ const ReviewCard = ({
             <h2 className="review__title">{`${brand} ${model}`}</h2>
             <span className="review__author">{`by ${owner}`}</span>
           </div>
-          <FontAwesomeIcon
-            onClick={() => deleteReview(owner)}
-            className="review__icon"
-            icon={faXmark}
-          />
+          <button className="review__icon" onClick={deleteAction}>
+            <FontAwesomeIcon className="review__icon" icon={faXmark} />
+          </button>
         </div>
         <div className="review__image-container">
           <img

@@ -84,7 +84,26 @@ describe("Given a ReviewCard component", () => {
       );
 
       const deleteButton = screen.getByText("Delete");
+
       await userEvent.click(deleteButton);
+
+      expect(mockUseReviews.deleteReview).toBeCalledWith(mockReview.id);
+    });
+
+    test("If the user click on the delete icon it should call the use reviews's delete review function with the id of the review", async () => {
+      wrappedRender(
+        <ReviewCard
+          brand={mockReview.brand}
+          model={mockReview.model}
+          picture={mockReview.picture}
+          review={mockReview.review}
+          owner={mockReview.owner}
+          id={mockReview.id}
+        />
+      );
+
+      const deleteIcon = screen.getAllByRole("button");
+      await userEvent.click(deleteIcon[0]);
 
       expect(mockUseReviews.deleteReview).toBeCalledWith(mockReview.id);
     });
