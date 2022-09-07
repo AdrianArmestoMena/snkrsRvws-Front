@@ -66,7 +66,29 @@ const useReviews = () => {
     return true;
   }, [dispatch, user.id]);
 
-  return { createReview, loadReviewsByOwner };
+  const deleteReview = useCallback(
+    async (id: string) => {
+      const token = localStorage.getItem("token");
+      try {
+        dispatch(loadingUiActionCreator());
+        await axios.delete(`${apiUrl}/reviews/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      } catch (error) {
+        const errorObject = JSON.parse((error as AxiosError).request.response);
+        dispatch(closeLoadingActionCreator());
+        dispatch(throwMessageErrorActionCreator(errorObject.error));
+        return false;
+      }
+      dispatch(closeAllActionCreator());
+      return true;
+    },
+    [dispatch]
+  );
+
+  return { createReview, loadReviewsByOwner, deleteReview };
 };
 
 export default useReviews;
