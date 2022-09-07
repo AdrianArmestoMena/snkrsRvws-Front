@@ -23,6 +23,7 @@ const ReviewsList = (): JSX.Element => {
           model={review.model}
           picture={review.picture}
           owner={user.userName}
+          id={review.id}
         />
       ))}
     </ReviewsListStyle>
