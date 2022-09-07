@@ -12,6 +12,7 @@ import SignupPage from "../../pages/SignupPage/SignupPage";
 import ReviewFormPage from "../../pages/ReviewFormPage/ReviewFormPage";
 import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
 import YourReviewsPage from "../../pages/YourReviewsPage/YourReviewsPage";
+import CredentialsValidation from "../CredentialsValidation/CredentialsValidation";
 
 const App = () => {
   const { getToken } = useStorage();
@@ -34,8 +35,22 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/signup" element={<SignupPage />} />
-          <Route path="/create-review" element={<ReviewFormPage />} />
-          <Route path="/your-reviews" element={<YourReviewsPage />} />
+          <Route
+            path="/create-review"
+            element={
+              <CredentialsValidation>
+                <ReviewFormPage />
+              </CredentialsValidation>
+            }
+          />
+          <Route
+            path="/your-reviews"
+            element={
+              <CredentialsValidation>
+                <YourReviewsPage />
+              </CredentialsValidation>
+            }
+          />
           <Route path="/login" element={<LoginPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
