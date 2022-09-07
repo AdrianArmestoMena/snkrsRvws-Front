@@ -35,7 +35,7 @@ const useReviews = () => {
       dispatch(throwMessageErrorActionCreator(errorObject.error));
       return false;
     }
-    navigate("/");
+    navigate("/your-reviews");
     dispatch(closeAllActionCreator());
     return response.data;
   };
