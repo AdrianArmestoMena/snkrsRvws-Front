@@ -13,6 +13,7 @@ import ReviewFormPage from "../../pages/ReviewFormPage/ReviewFormPage";
 import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
 import YourReviewsPage from "../../pages/YourReviewsPage/YourReviewsPage";
 import CredentialsValidation from "../CredentialsValidation/CredentialsValidation";
+import CredentialsReverseValidation from "../CredentialsReverseValidation/CredentialsReverseValidation";
 
 const App = () => {
   const { getToken } = useStorage();
@@ -34,7 +35,14 @@ const App = () => {
         {isOpen && <ModalError type={type} text={text} />}
         <Routes>
           <Route path="/" element={<Navigate to="/login" />} />
-          <Route path="/signup" element={<SignupPage />} />
+          <Route
+            path="/signup"
+            element={
+              <CredentialsReverseValidation>
+                <SignupPage />
+              </CredentialsReverseValidation>
+            }
+          />
           <Route
             path="/create-review"
             element={
@@ -51,7 +59,14 @@ const App = () => {
               </CredentialsValidation>
             }
           />
-          <Route path="/login" element={<LoginPage />} />
+          <Route
+            path="/login"
+            element={
+              <CredentialsReverseValidation>
+                <LoginPage />
+              </CredentialsReverseValidation>
+            }
+          />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
