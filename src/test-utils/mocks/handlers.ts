@@ -80,6 +80,35 @@ const handlers = [
       })
     );
   }),
+
+  rest.delete(`${apiUrl}/reviews/1234`, async (req, res, ctx) => {
+    const status = 200;
+    return res(
+      ctx.status(status),
+      ctx.json({
+        reviews: {
+          brand: "NIke",
+          model: "Jordan 11 low black and white",
+          picture: "uploads/f96fc1f1c03538f4940955da94925f90",
+          review: "weqklrn ejq rtjqenr qejrt qer iluqe",
+          owner: "6310d142612b1f0a1cec8961",
+          likes: [],
+          comments: [],
+          id: "6315c901e752dbaefbdfca05",
+        },
+      })
+    );
+  }),
+
+  rest.delete(`${apiUrl}/reviews/12345`, async (req, res, ctx) => {
+    const status = 404;
+    return res(
+      ctx.status(status),
+      ctx.json({
+        error: "error",
+      })
+    );
+  }),
   rest.get(`${apiUrl}/reviews/12345`, async (req, res, ctx) => {
     const status = 400;
 
