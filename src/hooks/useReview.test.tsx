@@ -149,4 +149,33 @@ describe("Given a useReviews custom hook", () => {
       expect(mockUseDispatch).toHaveBeenCalledWith(mockThrowError);
     });
   });
+
+  describe("When deleteReview  method is called with a correct id", () => {
+    test("Then it should called the dispatch with the load reviews action", async () => {
+      const id = "1234";
+      const {
+        result: {
+          current: { deleteReview },
+        },
+      } = renderHook(useReviews, { wrapper: Wrapper });
+
+      const returnedValued = await deleteReview(id);
+
+      expect(returnedValued).toBe(true);
+    });
+
+    test("Then if the request return an error it shouldn't called the dispatch with the load reviews action", async () => {
+      const id = "12345";
+
+      const {
+        result: {
+          current: { deleteReview },
+        },
+      } = renderHook(useReviews, { wrapper: Wrapper });
+
+      await deleteReview(id);
+
+      expect(mockUseDispatch).toHaveBeenCalledWith(mockThrowError);
+    });
+  });
 });
