@@ -9,6 +9,8 @@ const mockUser = {
   id: "1234",
 };
 const mockThrowError = "";
+const closeAllActionCreator = "";
+jest.useFakeTimers();
 
 jest.mock("../store/hooks", () => ({
   ...jest.requireActual("../store/hooks"),
@@ -19,6 +21,7 @@ jest.mock("../store/hooks", () => ({
 jest.mock("../store/features/uiModal/uiModalSlice", () => ({
   ...jest.requireActual("../store/features/uiModal/uiModalSlice"),
   throwMessageErrorActionCreator: () => mockThrowError,
+  closeAllActionCreator: () => closeAllActionCreator,
 }));
 
 describe("Given a useReviews custom hook", () => {
@@ -89,6 +92,10 @@ describe("Given a useReviews custom hook", () => {
       await createReview(formdata);
 
       expect(mockUseDispatch).toHaveBeenCalledWith(mockThrowError);
+
+      jest.advanceTimersByTime(4000);
+
+      expect(mockUseDispatch).toHaveBeenCalledWith(closeAllActionCreator);
     });
   });
 
@@ -148,6 +155,34 @@ describe("Given a useReviews custom hook", () => {
       );
       expect(mockUseDispatch).toHaveBeenCalledWith(mockThrowError);
     });
+
+    test("Then if the request return an error it should called the dispatch with the cloase all modals action after 3 seconds", async () => {
+      mockUser.id = "12345";
+
+      const getReviews = [
+        {
+          brand: "NIke",
+          model: "Jordan 11 low black and white",
+          picture: "uploads/f96fc1f1c03538f4940955da94925f90",
+          review: "weqklrn ejq rtjqenr qejrt qer iluqe",
+          owner: "6310d142612b1f0a1cec8961",
+          likes: [],
+          comments: [],
+          id: "6315c901e752dbaefbdfca05",
+        },
+      ];
+
+      const {
+        result: {
+          current: { loadReviewsByOwner },
+        },
+      } = renderHook(useReviews, { wrapper: Wrapper });
+
+      await loadReviewsByOwner();
+
+      jest.advanceTimersByTime(3100);
+      expect(mockUseDispatch).toHaveBeenCalledWith(closeAllActionCreator);
+    });
   });
 
   describe("When deleteReview  method is called with a correct id", () => {
@@ -176,6 +211,10 @@ describe("Given a useReviews custom hook", () => {
       await deleteReview(id);
 
       expect(mockUseDispatch).toHaveBeenCalledWith(mockThrowError);
+
+      jest.advanceTimersByTime(3100);
+
+      expect(mockUseDispatch).toHaveBeenCalledWith(closeAllActionCreator);
     });
   });
 });

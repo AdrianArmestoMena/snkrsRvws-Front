@@ -1,7 +1,7 @@
 import { screen, wrappedRender } from "../../test-utils/WrappedRender";
 import ReviewsList from "./ReviewsList";
 
-const reviews = [
+let mockReviews = [
   {
     brand: "NIke",
     model: "Jordan 11 low black and white",
@@ -15,7 +15,7 @@ const reviews = [
 ];
 jest.mock("../../store/hooks", () => ({
   ...jest.requireActual("../../store/hooks"),
-  useAppSelector: () => reviews,
+  useAppSelector: () => mockReviews,
 }));
 
 const mockUseReviews = {
@@ -25,19 +25,32 @@ const mockUseReviews = {
 jest.mock("../../hooks/useReviews", () => () => mockUseReviews);
 
 describe("Given a reviews list function", () => {
+  beforeEach(() => jest.clearAllMocks());
   describe("When it is instantiated", () => {
     test("Then it should us much reviews as reviews are on the reviews state", () => {
       wrappedRender(<ReviewsList></ReviewsList>);
 
       const items = screen.getAllByRole("listitem");
 
-      expect(items).toHaveLength(reviews.length);
+      expect(items).toHaveLength(mockReviews.length);
     });
 
     test("Then it should call userevies'function loadReviewsByOwner", () => {
       wrappedRender(<ReviewsList></ReviewsList>);
 
       expect(mockUseReviews.loadReviewsByOwner).toHaveBeenCalled();
+    });
+
+    test("Then there are not reviews in the state it should show an advice", () => {
+      mockReviews = [];
+
+      wrappedRender(<ReviewsList></ReviewsList>);
+
+      const noReviews = screen.getByRole("heading", {
+        name: "You still don't have reviews",
+      });
+
+      expect(noReviews).toBeInTheDocument();
     });
   });
 });

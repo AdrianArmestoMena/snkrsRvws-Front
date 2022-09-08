@@ -28,6 +28,8 @@ const ReviewCardStyle = styled.li`
     &__image-container {
       border-radius: 10px;
       height: auto;
+      max-height: 30rem;
+      overflow: hidden;
     }
     &__icon {
       width: 40px;
@@ -73,7 +75,8 @@ const ReviewCardStyle = styled.li`
       align-self: flex-start;
     }
     &__review {
-      max-height: 100%;
+      overflow: auto;
+      max-height: 40rem;
       display: none;
       flex: 1;
       font-weight: 700;

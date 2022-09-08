@@ -29,13 +29,16 @@ const useReviews = () => {
           Authorization: `Bearer ${token}`,
         },
       });
+      navigate("/your-reviews");
     } catch (error) {
       const errorObject = JSON.parse((error as AxiosError).request.response);
       dispatch(closeLoadingActionCreator());
       dispatch(throwMessageErrorActionCreator(errorObject.error));
+      setTimeout(() => {
+        dispatch(closeAllActionCreator());
+      }, 3000);
       return false;
     }
-    navigate("/your-reviews");
     dispatch(closeAllActionCreator());
     return response.data;
   };
@@ -60,6 +63,9 @@ const useReviews = () => {
       const errorObject = JSON.parse((error as AxiosError).request.response);
       dispatch(closeLoadingActionCreator());
       dispatch(throwMessageErrorActionCreator(errorObject.error));
+      setTimeout(() => {
+        dispatch(closeAllActionCreator());
+      }, 3000);
       return false;
     }
     dispatch(closeAllActionCreator());
@@ -81,6 +87,9 @@ const useReviews = () => {
         const errorObject = JSON.parse((error as AxiosError).request.response);
         dispatch(closeLoadingActionCreator());
         dispatch(throwMessageErrorActionCreator(errorObject.error));
+        setTimeout(() => {
+          dispatch(closeAllActionCreator());
+        }, 3000);
         return false;
       }
       dispatch(closeAllActionCreator());
