@@ -9,6 +9,7 @@ const mockUser = {
   id: "1234",
 };
 const mockThrowError = "";
+const mockcloaseAll = "";
 
 jest.mock("../store/hooks", () => ({
   ...jest.requireActual("../store/hooks"),
@@ -19,6 +20,7 @@ jest.mock("../store/hooks", () => ({
 jest.mock("../store/features/uiModal/uiModalSlice", () => ({
   ...jest.requireActual("../store/features/uiModal/uiModalSlice"),
   throwMessageErrorActionCreator: () => mockThrowError,
+  closeAllActionCreator: () => mockcloaseAll,
 }));
 
 describe("Given a useReviews custom hook", () => {
@@ -89,6 +91,10 @@ describe("Given a useReviews custom hook", () => {
       await createReview(formdata);
 
       expect(mockUseDispatch).toHaveBeenCalledWith(mockThrowError);
+
+      jest.advanceTimersByTime(3100);
+
+      expect(mockUseDispatch).toHaveBeenCalledWith(mockcloaseAll);
     });
   });
 
@@ -147,6 +153,10 @@ describe("Given a useReviews custom hook", () => {
         loadReviewsActionCreator(getReviews)
       );
       expect(mockUseDispatch).toHaveBeenCalledWith(mockThrowError);
+
+      jest.advanceTimersByTime(3100);
+
+      expect(mockUseDispatch).toHaveBeenCalledWith(mockcloaseAll);
     });
   });
 
@@ -176,6 +186,10 @@ describe("Given a useReviews custom hook", () => {
       await deleteReview(id);
 
       expect(mockUseDispatch).toHaveBeenCalledWith(mockThrowError);
+
+      jest.advanceTimersByTime(3100);
+
+      expect(mockUseDispatch).toHaveBeenCalledWith(mockcloaseAll);
     });
   });
 });
