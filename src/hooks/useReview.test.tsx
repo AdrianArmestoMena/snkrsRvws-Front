@@ -99,7 +99,7 @@ describe("Given a useReviews custom hook", () => {
     });
   });
 
-  describe("When loadbReviewsby owner method is called with a correct review", () => {
+  describe("When loadbReviewsby owner method is called with a correct owner id", () => {
     test("Then it should called the dispatch with the load reviews action", async () => {
       const getReviews = [
         {
@@ -179,6 +179,65 @@ describe("Given a useReviews custom hook", () => {
       } = renderHook(useReviews, { wrapper: Wrapper });
 
       await loadReviewsByOwner();
+
+      jest.advanceTimersByTime(3100);
+      expect(mockUseDispatch).toHaveBeenCalledWith(closeAllActionCreator);
+    });
+  });
+
+  describe("When loadbReviewbyId method is called with a correct id", () => {
+    const getReviews = [
+      {
+        brand: "Adidas",
+        model: "forum",
+        picture: "uploads/f96fc1f1c03538f4940955da94925f90",
+        review: "weqklrn ejq rtjqenr qejrt qer iluqe",
+        owner: "6310d142612b1f0a1cec8961",
+        likes: [],
+        comments: [],
+        id: "1234",
+      },
+    ];
+    test("Then it should called the dispatch with the load reviews action", async () => {
+      const {
+        result: {
+          current: { loadReviewById },
+        },
+      } = renderHook(useReviews, { wrapper: Wrapper });
+
+      await loadReviewById(getReviews[0].id);
+
+      expect(mockUseDispatch).toHaveBeenCalledWith(
+        loadReviewsActionCreator(getReviews)
+      );
+    });
+
+    test("Then if the request return an error it shouldn't called the dispatch with the load reviews action", async () => {
+      const reviewIncorrctId: string = "12345";
+
+      const {
+        result: {
+          current: { loadReviewById },
+        },
+      } = renderHook(useReviews, { wrapper: Wrapper });
+
+      await loadReviewById(reviewIncorrctId);
+
+      expect(mockUseDispatch).not.toHaveBeenCalledWith(
+        loadReviewsActionCreator(getReviews)
+      );
+      expect(mockUseDispatch).toHaveBeenCalledWith(mockThrowError);
+    });
+
+    test("Then if the request return an error it should called the dispatch with the cloase all modals action after 3 seconds", async () => {
+      const reviewIncorrctId: string = "12345";
+      const {
+        result: {
+          current: { loadReviewById },
+        },
+      } = renderHook(useReviews, { wrapper: Wrapper });
+
+      await loadReviewById(reviewIncorrctId);
 
       jest.advanceTimersByTime(3100);
       expect(mockUseDispatch).toHaveBeenCalledWith(closeAllActionCreator);
