@@ -72,6 +72,38 @@ const useReviews = () => {
     return true;
   }, [dispatch, user.id]);
 
+  const loadReviewById = useCallback(
+    async (id: string) => {
+      const token = localStorage.getItem("token");
+      try {
+        dispatch(loadingUiActionCreator());
+        const {
+          data: { reviews },
+        }: AxiosResponse<ReviewsResponse> = await axios.get(
+          `${apiUrl}/reviews/onereview/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        dispatch(loadReviewsActionCreator(reviews));
+      } catch (error) {
+        const errorObject = JSON.parse((error as AxiosError).request.response);
+        dispatch(closeLoadingActionCreator());
+        dispatch(throwMessageErrorActionCreator(errorObject.error));
+        setTimeout(() => {
+          dispatch(closeAllActionCreator());
+        }, 3000);
+        return false;
+      }
+      dispatch(closeAllActionCreator());
+      return true;
+    },
+    [dispatch]
+  );
+
   const deleteReview = useCallback(
     async (id: string) => {
       const token = localStorage.getItem("token");
@@ -98,7 +130,7 @@ const useReviews = () => {
     [dispatch, loadReviewsByOwner]
   );
 
-  return { createReview, loadReviewsByOwner, deleteReview };
+  return { createReview, loadReviewsByOwner, deleteReview, loadReviewById };
 };
 
 export default useReviews;
