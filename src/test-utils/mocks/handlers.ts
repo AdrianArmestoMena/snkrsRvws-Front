@@ -1,7 +1,8 @@
 import { rest } from "msw";
 
 const apiUrl = process.env.REACT_APP_API_URL as string;
-
+const correctId = "1234";
+const incorrectId = "12345";
 const handlers = [
   rest.post(`${apiUrl}/users/login`, async (req, res, ctx) => {
     const { password } = await req.json();
@@ -59,7 +60,7 @@ const handlers = [
     );
   }),
 
-  rest.get(`${apiUrl}/reviews/1234`, async (req, res, ctx) => {
+  rest.get(`${apiUrl}/reviews/${correctId}`, async (req, res, ctx) => {
     const status = 200;
 
     return res(
@@ -81,7 +82,7 @@ const handlers = [
     );
   }),
 
-  rest.delete(`${apiUrl}/reviews/1234`, async (req, res, ctx) => {
+  rest.delete(`${apiUrl}/reviews/${correctId}`, async (req, res, ctx) => {
     const status = 200;
     return res(
       ctx.status(status),
@@ -100,7 +101,7 @@ const handlers = [
     );
   }),
 
-  rest.delete(`${apiUrl}/reviews/12345`, async (req, res, ctx) => {
+  rest.delete(`${apiUrl}/reviews/${incorrectId}`, async (req, res, ctx) => {
     const status = 404;
     return res(
       ctx.status(status),
@@ -109,7 +110,8 @@ const handlers = [
       })
     );
   }),
-  rest.get(`${apiUrl}/reviews/12345`, async (req, res, ctx) => {
+
+  rest.get(`${apiUrl}/reviews/${incorrectId}`, async (req, res, ctx) => {
     const status = 400;
 
     return res(
@@ -119,6 +121,43 @@ const handlers = [
       })
     );
   }),
+
+  rest.get(
+    `${apiUrl}/reviews/onereview/${incorrectId}`,
+    async (req, res, ctx) => {
+      const status = 404;
+      return res(
+        ctx.status(status),
+        ctx.json({
+          error: "error",
+        })
+      );
+    }
+  ),
+
+  rest.get(
+    `${apiUrl}/reviews/onereview/${correctId}`,
+    async (req, res, ctx) => {
+      const status = 200;
+      return res(
+        ctx.status(status),
+        ctx.json({
+          reviews: [
+            {
+              brand: "Adidas",
+              model: "forum",
+              picture: "uploads/f96fc1f1c03538f4940955da94925f90",
+              review: "weqklrn ejq rtjqenr qejrt qer iluqe",
+              owner: "6310d142612b1f0a1cec8961",
+              likes: [],
+              comments: [],
+              id: "1234",
+            },
+          ],
+        })
+      );
+    }
+  ),
 ];
 
 export default handlers;
