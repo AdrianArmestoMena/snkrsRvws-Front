@@ -13,7 +13,7 @@ const ReviewsList = (): JSX.Element => {
     loadReviewsByOwner();
   }, [loadReviewsByOwner]);
 
-  return (
+  return reviews.length ? (
     <ReviewsListStyle>
       {reviews.map((review) => (
         <ReviewCard
@@ -27,6 +27,8 @@ const ReviewsList = (): JSX.Element => {
         />
       ))}
     </ReviewsListStyle>
+  ) : (
+    <h3 className="reviees__no-reviews">You still don't have reviews</h3>
   );
 };
 
