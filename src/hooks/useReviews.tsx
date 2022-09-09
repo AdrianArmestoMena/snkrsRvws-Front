@@ -43,6 +43,35 @@ const useReviews = () => {
     return response.data;
   };
 
+  const updateReview = async (formData: FormData, id: string) => {
+    let response;
+    const token = localStorage.getItem("token");
+    try {
+      dispatch(loadingUiActionCreator());
+      response = await axios.put(
+        `${apiUrl}/reviews/updatereview/${id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      navigate("/your-reviews");
+    } catch (error) {
+      const errorObject = JSON.parse((error as AxiosError).request.response);
+      dispatch(closeLoadingActionCreator());
+      dispatch(throwMessageErrorActionCreator(errorObject.error));
+      setTimeout(() => {
+        dispatch(closeAllActionCreator());
+      }, 3000);
+      return false;
+    }
+    dispatch(closeAllActionCreator());
+    return response.data;
+  };
+
   const loadReviewsByOwner = useCallback(async () => {
     const token = localStorage.getItem("token");
     try {
@@ -130,7 +159,13 @@ const useReviews = () => {
     [dispatch, loadReviewsByOwner]
   );
 
-  return { createReview, loadReviewsByOwner, deleteReview, loadReviewById };
+  return {
+    createReview,
+    loadReviewsByOwner,
+    deleteReview,
+    loadReviewById,
+    updateReview,
+  };
 };
 
 export default useReviews;
