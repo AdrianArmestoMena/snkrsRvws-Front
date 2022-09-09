@@ -279,12 +279,13 @@ describe("Given a useReviews custom hook", () => {
 
   describe("When updateReview method is called with a correct review and an id", () => {
     const review: ReviewAdd = {
-      brand: "nike",
-      model: "Jordan11",
-      review: "Nice shoes",
-      picture: "img",
+      brand: "adidas",
+      model: "12",
+      picture: "123",
+      review: "nix",
       owner: "630e5e99bd6d5f91b999517b",
     };
+
     const id = "1234";
     const reviewData = JSON.stringify(review);
 
@@ -296,10 +297,10 @@ describe("Given a useReviews custom hook", () => {
     test("Then it should return the created review", async () => {
       const expectedResponse = {
         newReview: {
-          brand: "nike",
-          model: "jordan11",
-          picture: "uploads\\b1c7cbcb713f5c58adfb155d8640088d",
-          review: "Nice shoes",
+          brand: "adidas",
+          model: "12",
+          picture: "123",
+          review: "nix",
           owner: "630e5e99bd6d5f91b999517b",
           likes: [],
           comments: [],
