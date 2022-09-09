@@ -1,17 +1,14 @@
-import TestRenderer from "react-test-renderer";
-import Wrapper from "../../test-utils/Wrapper";
+import { screen, wrappedRender } from "../../test-utils/WrappedRender";
 import DetailsPage from "./DetailsPage";
 
 describe("Given a detail Page function", () => {
   describe("When it's instantiated", () => {
-    test("Then it should match the html from Home page", () => {
-      const expectedLoginPage = TestRenderer.create(
-        <Wrapper>
-          <DetailsPage />
-        </Wrapper>
-      );
+    test("Then it should show a heading with the text your reviews", () => {
+      wrappedRender(<DetailsPage />);
 
-      expect(expectedLoginPage).toMatchSnapshot();
+      const heading = screen.getByRole("heading", { name: "Your Reviews" });
+
+      expect(heading).toBeInTheDocument();
     });
   });
 });
