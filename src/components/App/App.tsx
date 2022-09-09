@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import styledMainTheme from "../../stylesUtils/styledMainTheme";
 import Header from "../Header/Header";
 import ModalError from "../Modal/ModalError";
 import "./App.css";
-import useStorage from "../../hooks/useStorage";
 import { useAppSelector } from "../../store/hooks";
 import LoginPage from "../../pages/LoginPage/LoginPage";
 import SignupPage from "../../pages/SignupPage/SignupPage";
@@ -17,12 +16,6 @@ import CredentialsReverseValidation from "../CredentialsReverseValidation/Creden
 import DetailsPage from "../../pages/DetailsPage/DetailsPage";
 
 const App = () => {
-  const { getToken } = useStorage();
-
-  useEffect(() => {
-    getToken();
-  }, [getToken]);
-
   const {
     isLoading,
     modal: { isOpen, type, text },
@@ -45,7 +38,7 @@ const App = () => {
             }
           />
           <Route
-            path="/your-reviews/review/:id"
+            path="/review/:id"
             element={
               <CredentialsValidation>
                 <DetailsPage />
@@ -54,6 +47,14 @@ const App = () => {
           />
           <Route
             path="/create-review"
+            element={
+              <CredentialsValidation>
+                <ReviewFormPage />
+              </CredentialsValidation>
+            }
+          />
+          <Route
+            path="/modify-review"
             element={
               <CredentialsValidation>
                 <ReviewFormPage />
