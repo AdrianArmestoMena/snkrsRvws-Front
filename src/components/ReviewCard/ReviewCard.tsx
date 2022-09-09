@@ -1,6 +1,7 @@
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import useReviews from "../../hooks/useReviews";
 import ReviewCardStyle from "./ReviewCard.style";
 
@@ -21,6 +22,7 @@ const ReviewCard = ({
   picture,
   id,
 }: ReviewCardProps): JSX.Element => {
+  const navigate = useNavigate();
   const { deleteReview } = useReviews();
 
   const deleteAction = () => {
@@ -48,7 +50,10 @@ const ReviewCard = ({
           />
         </div>
         <div className="review__buttons-container">
-          <Button className="review__button review__view-button">
+          <Button
+            onClick={() => navigate(`review/${id}`)}
+            className="review__button review__view-button"
+          >
             View Review
           </Button>
           <Button

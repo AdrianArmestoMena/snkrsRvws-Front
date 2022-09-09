@@ -45,7 +45,7 @@ const DetailReviewStyle = styled.article`
     &__buttons-container {
       display: flex;
       gap: 5px;
-      justify-content: centera;
+      justify-content: center;
     }
     &__button {
       border-radius: 120px;
