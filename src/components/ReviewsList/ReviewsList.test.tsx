@@ -47,7 +47,7 @@ describe("Given a reviews list function", () => {
       wrappedRender(<ReviewsList></ReviewsList>);
 
       const noReviews = screen.getByRole("heading", {
-        name: "You still don't have reviews",
+        name: "You don't have reviews yet",
       });
 
       expect(noReviews).toBeInTheDocument();
