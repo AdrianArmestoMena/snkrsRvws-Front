@@ -276,4 +276,78 @@ describe("Given a useReviews custom hook", () => {
       expect(mockUseDispatch).toHaveBeenCalledWith(closeAllActionCreator);
     });
   });
+
+  describe("When updateReview method is called with a correct review and an id", () => {
+    const review: ReviewAdd = {
+      brand: "nike",
+      model: "Jordan11",
+      review: "Nice shoes",
+      picture: "img",
+      owner: "630e5e99bd6d5f91b999517b",
+    };
+    const id = "1234";
+    const reviewData = JSON.stringify(review);
+
+    const formdata = new FormData();
+
+    formdata.append("picture", "jordan.jpg");
+    formdata.append("review", reviewData);
+
+    test("Then it should return the created review", async () => {
+      const expectedResponse = {
+        newReview: {
+          brand: "nike",
+          model: "jordan11",
+          picture: "uploads\\b1c7cbcb713f5c58adfb155d8640088d",
+          review: "Nice shoes",
+          owner: "630e5e99bd6d5f91b999517b",
+          likes: [],
+          comments: [],
+          id: "63149166440acde4125bf0f8",
+        },
+      };
+
+      const {
+        result: {
+          current: { updateReview },
+        },
+      } = renderHook(useReviews, { wrapper: Wrapper });
+
+      const revicedResponse = await updateReview(formdata, id);
+
+      expect(revicedResponse).toStrictEqual(expectedResponse);
+    });
+  });
+
+  describe("When updateReview method is called with a incorrect data review", () => {
+    const review: ReviewAdd = {
+      brand: "",
+      model: "Jordan11",
+      review: "Nice shoes",
+      picture: "img",
+      owner: "630e5e99bd6d5f91b999517b",
+    };
+    const reviewData = JSON.stringify(review);
+    const id = "1234";
+    const formdata = new FormData();
+
+    formdata.append("picture", "jordan.jpg");
+    formdata.append("review", reviewData);
+
+    test("Then it should return the created review", async () => {
+      const {
+        result: {
+          current: { updateReview },
+        },
+      } = renderHook(useReviews, { wrapper: Wrapper });
+
+      await updateReview(formdata, id);
+
+      expect(mockUseDispatch).toHaveBeenCalledWith(mockThrowError);
+
+      jest.advanceTimersByTime(4000);
+
+      expect(mockUseDispatch).toHaveBeenCalledWith(closeAllActionCreator);
+    });
+  });
 });
