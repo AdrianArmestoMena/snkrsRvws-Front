@@ -16,6 +16,13 @@ const mockUseReviews = {
 };
 jest.mock("../../hooks/useReviews", () => () => mockUseReviews);
 
+const mockNavigate = jest.fn();
+
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useNavigate: () => mockNavigate,
+}));
+
 describe("Given a ReviewCard component", () => {
   describe("When it is instantiated with a review as props", () => {
     test("The it should show a heading with the brand and the model of the review", () => {
@@ -106,6 +113,25 @@ describe("Given a ReviewCard component", () => {
       await userEvent.click(deleteIcon[0]);
 
       expect(mockUseReviews.deleteReview).toBeCalledWith(mockReview.id);
+    });
+
+    test("If the user click on the view review button it should call the navigate", async () => {
+      wrappedRender(
+        <ReviewCard
+          brand={mockReview.brand}
+          model={mockReview.model}
+          picture={mockReview.picture}
+          review={mockReview.review}
+          owner={mockReview.owner}
+          id={mockReview.id}
+        />
+      );
+
+      const viewReview = screen.getByText("View Review");
+
+      await userEvent.click(viewReview);
+
+      expect(mockNavigate).toBeCalledWith(`review/${mockReview.id}`);
     });
   });
 });
