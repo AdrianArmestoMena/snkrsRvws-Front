@@ -60,6 +60,33 @@ const handlers = [
     );
   }),
 
+  rest.put(
+    `${apiUrl}/reviews/updatereview/${correctId}`,
+    async (req, res, ctx) => {
+      const request: any = await req;
+      const formData: string = await request._body.get("review");
+      const review = JSON.parse(formData);
+
+      const status = review.brand === "" ? 400 : 200;
+
+      return res(
+        ctx.status(status),
+        ctx.json({
+          newReview: {
+            brand: "adidas",
+            model: "12",
+            picture: "123",
+            review: "nix",
+            owner: "630e5e99bd6d5f91b999517b",
+            likes: [],
+            comments: [],
+            id: "63149166440acde4125bf0f8",
+          },
+        })
+      );
+    }
+  ),
+
   rest.get(`${apiUrl}/reviews/${correctId}`, async (req, res, ctx) => {
     const status = 200;
 
