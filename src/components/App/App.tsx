@@ -14,6 +14,7 @@ import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
 import YourReviewsPage from "../../pages/YourReviewsPage/YourReviewsPage";
 import CredentialsValidation from "../CredentialsValidation/CredentialsValidation";
 import CredentialsReverseValidation from "../CredentialsReverseValidation/CredentialsReverseValidation";
+import DetailsPage from "../../pages/DetailsPage/DetailsPage";
 
 const App = () => {
   const { getToken } = useStorage();
@@ -41,6 +42,14 @@ const App = () => {
               <CredentialsReverseValidation>
                 <SignupPage />
               </CredentialsReverseValidation>
+            }
+          />
+          <Route
+            path="/your-reviews/review/:id"
+            element={
+              <CredentialsValidation>
+                <DetailsPage />
+              </CredentialsValidation>
             }
           />
           <Route

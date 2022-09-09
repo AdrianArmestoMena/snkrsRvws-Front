@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given a detail Page function When it's instantiated Then it should match the html from Home page 1`] = `
+<main
+  className="sc-gsnTZi etYpNr"
+>
+  <h2
+    className="tittle"
+  >
+    Your Reviews
+  </h2>
+  <article
+    className="sc-bczRLJ hfzbse"
+  >
+    <div
+      className="review__mian-container"
+    >
+      <h2
+        className="review__title"
+      >
+         
+      </h2>
+      <span
+        className="review__author"
+      >
+        by 
+      </span>
+    </div>
+    <div
+      className="review__image-container"
+    >
+      <img
+        alt="bamba"
+        className="review__image"
+        src="http://localhost:4000/"
+        width={500}
+      />
+    </div>
+    <p
+      className="review__review"
+    />
+    <div
+      className="review__buttons-container"
+    >
+      <button
+        className="review__button review__view-button btn btn-primary"
+        disabled={false}
+        type="button"
+      >
+        Modify
+      </button>
+      <button
+        className="review__button review__delete-button btn btn-primary"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        Delete
+      </button>
+    </div>
+  </article>
+</main>
+`;
