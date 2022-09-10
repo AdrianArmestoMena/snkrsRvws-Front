@@ -5,6 +5,7 @@ const DetailReviewStyle = styled.article`
   padding: 10px;
   background-color: ${(props) => props.theme.drakGreen};
   color: ${(props) => props.theme.lightGreen};
+  display: flow-root;
   .review {
     &__mian-container {
       height: 100%;
@@ -46,6 +47,7 @@ const DetailReviewStyle = styled.article`
       display: flex;
       gap: 5px;
       justify-content: center;
+      align-self: flex-end;
     }
     &__button {
       border-radius: 120px;

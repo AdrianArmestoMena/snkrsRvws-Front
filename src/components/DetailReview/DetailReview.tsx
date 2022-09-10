@@ -37,7 +37,12 @@ const DetailReview = (): JSX.Element => {
       </div>
       <p className="review__review">{review.review}</p>
       <div className="review__buttons-container">
-        <Button className="review__button review__view-button">Modify</Button>
+        <Button
+          onClick={() => navigate(`/modify/${review.id}`)}
+          className="review__button review__view-button"
+        >
+          Modify
+        </Button>
         <Button
           onClick={deleteAction}
           className="review__button review__delete-button"

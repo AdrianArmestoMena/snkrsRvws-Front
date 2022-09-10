@@ -54,7 +54,7 @@ const App = () => {
             }
           />
           <Route
-            path="/modify-review"
+            path="/modify/:reviewId"
             element={
               <CredentialsValidation>
                 <ReviewFormPage />
