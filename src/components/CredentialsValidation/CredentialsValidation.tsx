@@ -10,7 +10,6 @@ const CredentialsValidation = ({ children }: CredentialsValidationProps) => {
   const user = useAppSelector((state) => state.users.id);
   const navigate = useNavigate();
   const logged = user === "" ? false : true;
-
   useEffect(() => {
     if (!logged) {
       navigate("/login");
