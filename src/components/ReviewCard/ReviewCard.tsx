@@ -12,6 +12,7 @@ interface ReviewCardProps {
   review: string;
   picture: string;
   id: string;
+  backupImage: string;
 }
 
 const ReviewCard = ({
@@ -21,6 +22,7 @@ const ReviewCard = ({
   review,
   picture,
   id,
+  backupImage,
 }: ReviewCardProps): JSX.Element => {
   const navigate = useNavigate();
   const { deleteReview } = useReviews();
@@ -45,7 +47,7 @@ const ReviewCard = ({
           <img
             className="review__image"
             width={500}
-            src={`${process.env.REACT_APP_API_URL}/${picture}`}
+            src={backupImage}
             alt="bamba"
           />
         </div>

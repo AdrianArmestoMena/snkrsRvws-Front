@@ -31,8 +31,8 @@ const DetailReview = (): JSX.Element => {
         <img
           className="review__image"
           width={500}
-          src={`${process.env.REACT_APP_API_URL}/${review.picture}`}
-          alt="bamba"
+          src={review.backupImage}
+          alt={`${review.brand} ${review.model}`}
         />
       </div>
       <p className="review__review">{review.review}</p>
