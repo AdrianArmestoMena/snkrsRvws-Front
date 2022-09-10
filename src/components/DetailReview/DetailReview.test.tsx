@@ -75,5 +75,15 @@ describe("Given a ReviewCard component", () => {
       expect(mockUseReviews.deleteReview).toBeCalledWith(mockParam.id);
       expect(mockNavigate).toBeCalledWith(route);
     });
+
+    test("If the user click on the modify button it should call the navigate with /modify/ and the id of the review", async () => {
+      wrappedRender(<DetailReview />);
+      const route = `/modify/${mockReviews[0].id}`;
+      const deleteButton = screen.getByText("Modify");
+
+      await userEvent.click(deleteButton);
+
+      expect(mockNavigate).toBeCalledWith(route);
+    });
   });
 });
