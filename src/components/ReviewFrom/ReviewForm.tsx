@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import useReviews from "../../hooks/useReviews";
@@ -8,18 +8,25 @@ let formData = new FormData();
 
 const ReviewForm = (): JSX.Element => {
   const { reviewId } = useParams();
-  const { id } = useAppSelector((state) => state.users);
+  const { id: userId } = useAppSelector((state) => state.users);
+  const [firstReview] = useAppSelector((state) => state.reviews);
+  const { picture, brand, model, review: initialReview } = firstReview;
+  const { createReview, updateReview, loadReviewById } = useReviews();
+
+  useEffect(() => {
+    if (reviewId) {
+      loadReviewById(reviewId);
+    }
+  }, [loadReviewById, reviewId]);
   const initialState = {
-    brand: "",
-    model: "",
-    review: "",
-    picture: "",
+    brand: reviewId ? brand : "",
+    model: reviewId ? model : "",
+    review: reviewId ? initialReview : "",
+    picture: reviewId ? picture : "",
   };
 
   const [validated, setValidated] = useState(false);
   const [review, setReview] = useState(initialState);
-
-  const { createReview, updateReview } = useReviews();
 
   const handleClick = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -29,7 +36,7 @@ const ReviewForm = (): JSX.Element => {
       setValidated(true);
     } else {
       event.preventDefault();
-      formData.append("review", JSON.stringify({ ...review, owner: id }));
+      formData.append("review", JSON.stringify({ ...review, owner: userId }));
 
       (await !reviewId)
         ? createReview(formData)

@@ -7,6 +7,7 @@ import ReviewForm from "./ReviewForm";
 const mockUseReviews = {
   createReview: jest.fn().mockResolvedValue(true),
   updateReview: jest.fn().mockResolvedValue(true),
+  loadReviewById: jest.fn(),
 };
 
 const mockNavigate = jest.fn();
@@ -78,6 +79,7 @@ describe("Given a ReviewForm function", () => {
     });
 
     test("And if the user fill all the inputs and click on the button it should call the crate review action of useReviews", async () => {
+      mockParam.reviewId = false;
       wrappedRender(<ReviewForm />);
 
       const type = "Nike";
