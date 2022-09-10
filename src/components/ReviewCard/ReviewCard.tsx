@@ -51,7 +51,7 @@ const ReviewCard = ({
         </div>
         <div className="review__buttons-container">
           <Button
-            onClick={() => navigate(`review/${id}`)}
+            onClick={() => navigate(`/review/${id}`)}
             className="review__button review__view-button"
           >
             View Review

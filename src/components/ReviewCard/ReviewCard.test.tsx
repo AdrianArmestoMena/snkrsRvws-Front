@@ -131,7 +131,7 @@ describe("Given a ReviewCard component", () => {
 
       await userEvent.click(viewReview);
 
-      expect(mockNavigate).toBeCalledWith(`review/${mockReview.id}`);
+      expect(mockNavigate).toBeCalledWith(`/review/${mockReview.id}`);
     });
   });
 });
