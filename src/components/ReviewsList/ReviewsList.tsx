@@ -24,6 +24,7 @@ const ReviewsList = (): JSX.Element => {
           picture={review.picture}
           owner={user.userName}
           id={review.id}
+          backupImage={review.backupImage}
         />
       ))}
     </ReviewsListStyle>

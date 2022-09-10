@@ -12,9 +12,10 @@ const HeaderStyle = styled.header`
       justify-content: center;
       align-items: center;
       font-size: 1.2rem;
-      position: sticky;
+      position: fixed;
       top: 0;
       z-index: 20;
+      min-width: 100vw;
       padding: 0 30px 0 30px;
     }
 

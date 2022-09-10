@@ -12,6 +12,7 @@ describe("Given a reviews reducer function", () => {
       likes: [],
       comments: [],
       id: "",
+      backupImage: "url",
     },
   ];
   describe("When it is called with an undefined action and an unknow state", () => {
@@ -33,6 +34,7 @@ describe("Given a reviews reducer function", () => {
             likes: [],
             comments: [],
             id: "1234",
+            backupImage: "url",
           },
         ];
 
