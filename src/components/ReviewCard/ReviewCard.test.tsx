@@ -6,9 +6,10 @@ const mockReview = {
   brand: "NIke",
   model: "Jordan 11 low black and white",
   picture: "f96fc1f1c03538f4940955da94925f90",
-  review: "weqklrn ejq rtjqenr qejrt qer iluqe",
+  review: "nice Shoes",
   owner: "6310d142612b1f0a1cec8961",
   id: "uabuidwnsuqifbqekjf",
+  backupImage: "url",
 };
 
 const mockUseReviews = {
@@ -34,6 +35,7 @@ describe("Given a ReviewCard component", () => {
           review={mockReview.review}
           owner={mockReview.owner}
           id={mockReview.id}
+          backupImage={mockReview.backupImage}
         />
       );
       const heading = screen.getByRole("heading", {
@@ -52,14 +54,12 @@ describe("Given a ReviewCard component", () => {
           review={mockReview.review}
           owner={mockReview.owner}
           id={mockReview.id}
+          backupImage={mockReview.backupImage}
         />
       );
       const image = screen.getByRole("img");
 
-      expect(image).toHaveAttribute(
-        "src",
-        `${process.env.REACT_APP_API_URL}/${mockReview.picture}`
-      );
+      expect(image).toHaveAttribute("src", mockReview.backupImage);
     });
 
     test("Then it should show the owner", () => {
@@ -71,6 +71,7 @@ describe("Given a ReviewCard component", () => {
           review={mockReview.review}
           owner={mockReview.owner}
           id={mockReview.id}
+          backupImage={mockReview.backupImage}
         />
       );
       const owner = screen.getByText(`by ${mockReview.owner}`);
@@ -87,6 +88,7 @@ describe("Given a ReviewCard component", () => {
           review={mockReview.review}
           owner={mockReview.owner}
           id={mockReview.id}
+          backupImage={mockReview.backupImage}
         />
       );
 
@@ -106,6 +108,7 @@ describe("Given a ReviewCard component", () => {
           review={mockReview.review}
           owner={mockReview.owner}
           id={mockReview.id}
+          backupImage={mockReview.backupImage}
         />
       );
 
@@ -124,6 +127,7 @@ describe("Given a ReviewCard component", () => {
           review={mockReview.review}
           owner={mockReview.owner}
           id={mockReview.id}
+          backupImage={mockReview.backupImage}
         />
       );
 
