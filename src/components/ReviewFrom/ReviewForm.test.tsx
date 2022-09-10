@@ -1,6 +1,5 @@
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { S } from "msw/lib/glossary-c690f512";
 import React from "react";
 import { wrappedRender } from "../../test-utils/WrappedRender";
 import ReviewForm from "./ReviewForm";
