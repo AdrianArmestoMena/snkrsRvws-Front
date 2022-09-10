@@ -17,6 +17,7 @@ let mockReviews = [
     likes: [],
     comments: [],
     id: "631765170a79f65125123e64",
+    backupImage: "url",
   },
 ];
 const mockNavigate = jest.fn();
@@ -52,10 +53,7 @@ describe("Given a ReviewCard component", () => {
       wrappedRender(<DetailReview />);
       const image = screen.getByRole("img");
 
-      expect(image).toHaveAttribute(
-        "src",
-        `${process.env.REACT_APP_API_URL}/${mockReviews[0].picture}`
-      );
+      expect(image).toHaveAttribute("src", mockReviews[0].backupImage);
     });
 
     test("Then it should show the owner", () => {

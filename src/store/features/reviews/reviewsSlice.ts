@@ -11,6 +11,7 @@ const initialState: Review[] = [
     likes: [],
     comments: [],
     id: "",
+    backupImage: "url",
   },
 ];
 

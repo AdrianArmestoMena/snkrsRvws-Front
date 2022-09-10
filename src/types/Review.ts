@@ -15,6 +15,7 @@ export interface Review {
   likes: string[];
   comments: string[];
   id: string;
+  backupImage: string;
 }
 
 export interface ReviewsResponse {

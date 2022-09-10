@@ -55,6 +55,7 @@ const handlers = [
           likes: [],
           comments: [],
           id: "63149166440acde4125bf0f8",
+          backupImage: "url",
         },
       })
     );
@@ -103,6 +104,7 @@ const handlers = [
             likes: [],
             comments: [],
             id: "6315c901e752dbaefbdfca05",
+            backupImage: "url",
           },
         ],
       })
@@ -123,6 +125,7 @@ const handlers = [
           likes: [],
           comments: [],
           id: "6315c901e752dbaefbdfca05",
+          backupImage: "url",
         },
       })
     );
@@ -179,6 +182,7 @@ const handlers = [
               likes: [],
               comments: [],
               id: "1234",
+              backupImage: "url",
             },
           ],
         })

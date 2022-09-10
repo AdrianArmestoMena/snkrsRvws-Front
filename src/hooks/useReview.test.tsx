@@ -52,6 +52,7 @@ describe("Given a useReviews custom hook", () => {
           likes: [],
           comments: [],
           id: "63149166440acde4125bf0f8",
+          backupImage: "url",
         },
       };
 
@@ -111,6 +112,7 @@ describe("Given a useReviews custom hook", () => {
           likes: [],
           comments: [],
           id: "6315c901e752dbaefbdfca05",
+          backupImage: "url",
         },
       ];
       const {
@@ -139,6 +141,7 @@ describe("Given a useReviews custom hook", () => {
           likes: [],
           comments: [],
           id: "6315c901e752dbaefbdfca05",
+          backupImage: "url",
         },
       ];
 
@@ -158,19 +161,6 @@ describe("Given a useReviews custom hook", () => {
 
     test("Then if the request return an error it should called the dispatch with the cloase all modals action after 3 seconds", async () => {
       mockUser.id = "12345";
-
-      const getReviews = [
-        {
-          brand: "NIke",
-          model: "Jordan 11 low black and white",
-          picture: "uploads/f96fc1f1c03538f4940955da94925f90",
-          review: "weqklrn ejq rtjqenr qejrt qer iluqe",
-          owner: "6310d142612b1f0a1cec8961",
-          likes: [],
-          comments: [],
-          id: "6315c901e752dbaefbdfca05",
-        },
-      ];
 
       const {
         result: {
@@ -196,6 +186,7 @@ describe("Given a useReviews custom hook", () => {
         likes: [],
         comments: [],
         id: "1234",
+        backupImage: "url",
       },
     ];
     test("Then it should called the dispatch with the load reviews action", async () => {
