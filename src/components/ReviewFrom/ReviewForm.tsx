@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 import useReviews from "../../hooks/useReviews";
 import { useAppSelector } from "../../store/hooks";
 
 let formData = new FormData();
 
 const ReviewForm = (): JSX.Element => {
+  const { reviewId } = useParams();
   const { id } = useAppSelector((state) => state.users);
-
   const initialState = {
     brand: "",
     model: "",
@@ -18,7 +19,7 @@ const ReviewForm = (): JSX.Element => {
   const [validated, setValidated] = useState(false);
   const [review, setReview] = useState(initialState);
 
-  const { createReview } = useReviews();
+  const { createReview, updateReview } = useReviews();
 
   const handleClick = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -29,7 +30,10 @@ const ReviewForm = (): JSX.Element => {
     } else {
       event.preventDefault();
       formData.append("review", JSON.stringify({ ...review, owner: id }));
-      await createReview(formData);
+
+      (await !reviewId)
+        ? createReview(formData)
+        : updateReview(formData, reviewId as string);
       formData = new FormData();
       setReview(initialState);
       setValidated(false);
@@ -95,7 +99,7 @@ const ReviewForm = (): JSX.Element => {
         variant="primary"
         type="submit"
       >
-        Craete Review
+        {!reviewId ? "Craete Review" : "Modify"}
       </Button>
     </Form>
   );
