@@ -29,9 +29,13 @@ const Pagination = ({ isHome }: PaginationProps): JSX.Element => {
     }
   };
 
-  const paginationLess = () => {
+  const paginationLess = async () => {
     const pageLess = pageNumber - 1;
-    if (pageLess === 0) {
+    if (
+      (!isHome
+        ? await loadReviewsByOwner(pageLess)
+        : await loadaAllReviews(pageLess)) !== 0
+    ) {
       setPage(pageLess);
     }
   };
@@ -43,10 +47,10 @@ const Pagination = ({ isHome }: PaginationProps): JSX.Element => {
   return (
     <PaginationStyled className="pagination">
       <Button onClick={() => paginationLess()}>
-        <FontAwesomeIcon icon={faChevronLeft} />
+        <FontAwesomeIcon className="jadsbjfdshfbh" icon={faChevronLeft} />
       </Button>
       <span>{`Page ${pageNumber}`}</span>
-      <Button onClick={() => paginationPlus()}>
+      <Button className="11111" onClick={() => paginationPlus()}>
         <FontAwesomeIcon icon={faChevronRight} />
       </Button>
     </PaginationStyled>

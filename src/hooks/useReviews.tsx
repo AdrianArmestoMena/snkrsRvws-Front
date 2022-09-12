@@ -101,7 +101,7 @@ const useReviews = () => {
         setTimeout(() => {
           dispatch(closeAllActionCreator());
         }, 3000);
-        return false;
+        return 0;
       }
     },
     [dispatch, user.id]
@@ -135,7 +135,7 @@ const useReviews = () => {
         setTimeout(() => {
           dispatch(closeAllActionCreator());
         }, 3000);
-        return false;
+        return 0;
       }
     },
     [dispatch]
