@@ -20,6 +20,7 @@ jest.mock("../../store/hooks", () => ({
 
 const mockUseReviews = {
   loadReviewsByOwner: jest.fn(),
+  loadaAllReviews: jest.fn(),
 };
 
 jest.mock("../../hooks/useReviews", () => () => mockUseReviews);
@@ -48,6 +49,18 @@ describe("Given a reviews list function", () => {
 
       const noReviews = screen.getByRole("heading", {
         name: "You don't have reviews yet",
+      });
+
+      expect(noReviews).toBeInTheDocument();
+    });
+
+    test("Then there are not reviews in the state it should show an advice if isHome is true", () => {
+      mockReviews = [];
+
+      wrappedRender(<ReviewsList isHome={true}></ReviewsList>);
+
+      const noReviews = screen.getByRole("heading", {
+        name: "No reviews found",
       });
 
       expect(noReviews).toBeInTheDocument();
