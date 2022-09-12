@@ -4,14 +4,18 @@ import { useAppSelector } from "../../store/hooks";
 import ReviewCard from "../ReviewCard/ReviewCard";
 import ReviewsListStyle from "./ReviewsList.style";
 
-const ReviewsList = (): JSX.Element => {
-  const { loadReviewsByOwner } = useReviews();
+interface ReviewsListParams {
+  isHome: boolean;
+}
+
+const ReviewsList = ({ isHome }: ReviewsListParams): JSX.Element => {
+  const { loadReviewsByOwner, loadaAllReviews } = useReviews();
   const reviews = useAppSelector((state) => state.reviews);
   const user = useAppSelector((state) => state.users);
 
   useEffect(() => {
-    loadReviewsByOwner();
-  }, [loadReviewsByOwner]);
+    !isHome ? loadReviewsByOwner() : loadaAllReviews();
+  }, [loadReviewsByOwner, loadaAllReviews, isHome]);
 
   return reviews.length ? (
     <ReviewsListStyle>
@@ -22,14 +26,16 @@ const ReviewsList = (): JSX.Element => {
           brand={review.brand}
           model={review.model}
           picture={review.picture}
-          owner={user.userName}
+          owner={!isHome ? user.userName : ""}
           id={review.id}
           backupImage={review.backupImage}
         />
       ))}
     </ReviewsListStyle>
   ) : (
-    <h3 className="reviees__no-reviews">You don't have reviews yet</h3>
+    <h3 className="reviees__no-reviews">
+      {isHome ? "No reviews found" : "You don't have reviews yet"}
+    </h3>
   );
 };
 

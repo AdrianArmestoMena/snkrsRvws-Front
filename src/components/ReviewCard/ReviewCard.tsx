@@ -37,7 +37,9 @@ const ReviewCard = ({
         <div className="review__title-container">
           <div className="review__title-athor">
             <h2 className="review__title">{`${brand} ${model}`}</h2>
-            <span className="review__author">{`by ${owner}`}</span>
+            <span className="review__author">
+              {owner !== "" ? `by ${owner}` : ""}
+            </span>
           </div>
           <button className="review__icon" onClick={deleteAction}>
             <FontAwesomeIcon className="review__icon" icon={faXmark} />
