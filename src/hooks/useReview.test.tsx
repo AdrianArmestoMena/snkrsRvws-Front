@@ -1,4 +1,5 @@
 import { renderHook } from "@testing-library/react";
+import axios from "axios";
 import { loadReviewsActionCreator } from "../store/features/reviews/reviewsSlice";
 import Wrapper from "../test-utils/Wrapper";
 import { ReviewAdd } from "../types/Review";
@@ -413,6 +414,50 @@ describe("Given a useReviews custom hook", () => {
 
       jest.advanceTimersByTime(4000);
 
+      expect(mockUseDispatch).toHaveBeenCalledWith(closeAllActionCreator);
+    });
+  });
+
+  describe("When load all reviews  method is called", () => {
+    test("Then it should called the dispatch with the load reviews action", async () => {
+      const getReviews = [
+        {
+          brand: "Nike",
+          model: "Jordan 11 low black and white",
+          picture: "uploads/f96fc1f1c03538f4940955da94925f90",
+          review: "weqklrn ejq rtjqenr qejrt qer iluqe",
+          owner: "6310d142612b1f0a1cec8961",
+          likes: [],
+          comments: [],
+          id: "6315c901e752dbaefbdfca05",
+          backupImage: "url",
+        },
+      ];
+      const {
+        result: {
+          current: { loadaAllReviews },
+        },
+      } = renderHook(useReviews, { wrapper: Wrapper });
+
+      await loadaAllReviews();
+
+      expect(mockUseDispatch).toHaveBeenCalledWith(
+        loadReviewsActionCreator(getReviews)
+      );
+    });
+
+    test("Then if the request return an error it should called the dispatch with the cloase all modals action after 3 seconds", async () => {
+      axios.get = jest.fn().mockRejectedValue(new Error());
+
+      const {
+        result: {
+          current: { loadaAllReviews },
+        },
+      } = renderHook(useReviews, { wrapper: Wrapper });
+
+      await loadaAllReviews();
+
+      jest.advanceTimersByTime(3100);
       expect(mockUseDispatch).toHaveBeenCalledWith(closeAllActionCreator);
     });
   });
