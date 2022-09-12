@@ -14,6 +14,7 @@ import YourReviewsPage from "../../pages/YourReviewsPage/YourReviewsPage";
 import CredentialsValidation from "../CredentialsValidation/CredentialsValidation";
 import CredentialsReverseValidation from "../CredentialsReverseValidation/CredentialsReverseValidation";
 import DetailsPage from "../../pages/DetailsPage/DetailsPage";
+import HomePage from "../../pages/Home/HomePage";
 
 const App = () => {
   const {
@@ -69,6 +70,7 @@ const App = () => {
               </CredentialsValidation>
             }
           />
+          <Route path="/home" element={<HomePage />} />
           <Route
             path="/login"
             element={
