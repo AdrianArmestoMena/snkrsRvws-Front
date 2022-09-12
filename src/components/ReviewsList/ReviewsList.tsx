@@ -33,7 +33,7 @@ const ReviewsList = ({ isHome }: ReviewsListParams): JSX.Element => {
           backupImage={review.backupImage}
         />
       ))}
-      <Pagination isHome />
+      <Pagination isHome={isHome} />
     </ReviewsListStyle>
   ) : (
     <h3 className="reviees__no-reviews">
