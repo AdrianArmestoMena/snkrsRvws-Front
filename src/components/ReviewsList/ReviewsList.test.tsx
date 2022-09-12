@@ -20,6 +20,7 @@ jest.mock("../../store/hooks", () => ({
 
 const mockUseReviews = {
   loadReviewsByOwner: jest.fn(),
+  loadaAllReviews: jest.fn(),
 };
 
 jest.mock("../../hooks/useReviews", () => () => mockUseReviews);
@@ -28,7 +29,7 @@ describe("Given a reviews list function", () => {
   beforeEach(() => jest.clearAllMocks());
   describe("When it is instantiated", () => {
     test("Then it should us much reviews as reviews are on the reviews state", () => {
-      wrappedRender(<ReviewsList></ReviewsList>);
+      wrappedRender(<ReviewsList isHome={false}></ReviewsList>);
 
       const items = screen.getAllByRole("listitem");
 
@@ -36,7 +37,7 @@ describe("Given a reviews list function", () => {
     });
 
     test("Then it should call userevies'function loadReviewsByOwner", () => {
-      wrappedRender(<ReviewsList></ReviewsList>);
+      wrappedRender(<ReviewsList isHome={false}></ReviewsList>);
 
       expect(mockUseReviews.loadReviewsByOwner).toHaveBeenCalled();
     });
@@ -44,10 +45,22 @@ describe("Given a reviews list function", () => {
     test("Then there are not reviews in the state it should show an advice", () => {
       mockReviews = [];
 
-      wrappedRender(<ReviewsList></ReviewsList>);
+      wrappedRender(<ReviewsList isHome={false}></ReviewsList>);
 
       const noReviews = screen.getByRole("heading", {
         name: "You don't have reviews yet",
+      });
+
+      expect(noReviews).toBeInTheDocument();
+    });
+
+    test("Then there are not reviews in the state it should show an advice if isHome is true", () => {
+      mockReviews = [];
+
+      wrappedRender(<ReviewsList isHome={true}></ReviewsList>);
+
+      const noReviews = screen.getByRole("heading", {
+        name: "No reviews found",
       });
 
       expect(noReviews).toBeInTheDocument();
