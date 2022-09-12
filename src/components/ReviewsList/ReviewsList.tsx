@@ -1,5 +1,4 @@
-import { is } from "immer/dist/internal";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import useReviews from "../../hooks/useReviews";
 import { useAppSelector } from "../../store/hooks";
 import Pagination from "../Pagination/Pagination";
