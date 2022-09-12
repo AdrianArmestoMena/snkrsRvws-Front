@@ -72,59 +72,74 @@ const useReviews = () => {
     return response.data;
   };
 
-  const loadReviewsByOwner = useCallback(async () => {
-    const token = localStorage.getItem("token");
-    try {
-      dispatch(loadingUiActionCreator());
-      const {
-        data: { reviews },
-      }: AxiosResponse<ReviewsResponse> = await axios.get(
-        `${apiUrl}/reviews/${user.id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+  const loadReviewsByOwner = useCallback(
+    async (page: number) => {
+      const token = localStorage.getItem("token");
+      try {
+        dispatch(loadingUiActionCreator());
+        const {
+          data: { reviews },
+        }: AxiosResponse<ReviewsResponse> = await axios.get(
+          `${apiUrl}/reviews/${user.id}?page=${page}&limit=1`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (reviews.length) {
+          dispatch(loadReviewsActionCreator(reviews));
+          dispatch(closeAllActionCreator());
+          return reviews.length;
         }
-      );
-
-      dispatch(loadReviewsActionCreator(reviews));
-    } catch (error) {
-      const errorObject = JSON.parse((error as AxiosError).request.response);
-      dispatch(closeLoadingActionCreator());
-      dispatch(throwMessageErrorActionCreator(errorObject.error));
-      setTimeout(() => {
         dispatch(closeAllActionCreator());
-      }, 3000);
-      return false;
-    }
-    dispatch(closeAllActionCreator());
-    return true;
-  }, [dispatch, user.id]);
+        return reviews.length;
+      } catch (error) {
+        const errorObject = JSON.parse((error as AxiosError).request.response);
+        dispatch(closeLoadingActionCreator());
+        dispatch(throwMessageErrorActionCreator(errorObject.error));
+        setTimeout(() => {
+          dispatch(closeAllActionCreator());
+        }, 3000);
+        return false;
+      }
+    },
+    [dispatch, user.id]
+  );
 
-  const loadaAllReviews = useCallback(async () => {
-    const token = localStorage.getItem("token");
-    try {
-      dispatch(loadingUiActionCreator());
-      const {
-        data: { reviews },
-      }: AxiosResponse<ReviewsResponse> = await axios.get(`${apiUrl}/reviews`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      dispatch(loadReviewsActionCreator(reviews));
-    } catch (error) {
-      dispatch(closeLoadingActionCreator());
-      dispatch(throwMessageErrorActionCreator("Could not load reviews"));
-      setTimeout(() => {
+  const loadaAllReviews = useCallback(
+    async (page: number) => {
+      const token = localStorage.getItem("token");
+      try {
+        dispatch(loadingUiActionCreator());
+        const {
+          data: { reviews },
+        }: AxiosResponse<ReviewsResponse> = await axios.get(
+          `${apiUrl}/reviews?page=${page}&limit=1`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (reviews.length) {
+          dispatch(loadReviewsActionCreator(reviews));
+          dispatch(closeAllActionCreator());
+          return reviews.length;
+        }
         dispatch(closeAllActionCreator());
-      }, 3000);
-      return false;
-    }
-    dispatch(closeAllActionCreator());
-    return true;
-  }, [dispatch]);
+        return reviews.length;
+      } catch (error) {
+        dispatch(closeLoadingActionCreator());
+        dispatch(throwMessageErrorActionCreator("Could not load reviews"));
+        setTimeout(() => {
+          dispatch(closeAllActionCreator());
+        }, 3000);
+        return false;
+      }
+    },
+    [dispatch]
+  );
 
   const loadReviewsByBrand = useCallback(
     async (brand: string) => {
@@ -200,7 +215,7 @@ const useReviews = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        loadReviewsByOwner();
+        loadReviewsByOwner(1);
       } catch (error) {
         const errorObject = JSON.parse((error as AxiosError).request.response);
         dispatch(closeLoadingActionCreator());

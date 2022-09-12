@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import useReviews from "../../hooks/useReviews";
 import { useAppSelector } from "../../store/hooks";
+import Pagination from "../Pagination/Pagination";
 import ReviewCard from "../ReviewCard/ReviewCard";
 import ReviewsListStyle from "./ReviewsList.style";
 
@@ -10,12 +11,13 @@ interface ReviewsListParams {
 
 const ReviewsList = ({ isHome }: ReviewsListParams): JSX.Element => {
   const { loadReviewsByOwner, loadaAllReviews } = useReviews();
+
   const reviews = useAppSelector((state) => state.reviews);
   const user = useAppSelector((state) => state.users);
 
   useEffect(() => {
-    !isHome ? loadReviewsByOwner() : loadaAllReviews();
-  }, [loadReviewsByOwner, loadaAllReviews, isHome]);
+    !isHome ? loadReviewsByOwner(1) : loadaAllReviews(1);
+  }, [loadReviewsByOwner, isHome, loadaAllReviews]);
 
   return reviews.length ? (
     <ReviewsListStyle>
@@ -31,6 +33,7 @@ const ReviewsList = ({ isHome }: ReviewsListParams): JSX.Element => {
           backupImage={review.backupImage}
         />
       ))}
+      <Pagination isHome />
     </ReviewsListStyle>
   ) : (
     <h3 className="reviees__no-reviews">
