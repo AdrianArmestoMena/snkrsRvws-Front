@@ -101,6 +101,31 @@ const useReviews = () => {
     return true;
   }, [dispatch, user.id]);
 
+  const loadaAllReviews = useCallback(async () => {
+    const token = localStorage.getItem("token");
+    try {
+      dispatch(loadingUiActionCreator());
+      const {
+        data: { reviews },
+      }: AxiosResponse<ReviewsResponse> = await axios.get(`${apiUrl}/reviews`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      dispatch(loadReviewsActionCreator(reviews));
+    } catch (error) {
+      dispatch(closeLoadingActionCreator());
+      dispatch(throwMessageErrorActionCreator("Could not load reviews"));
+      setTimeout(() => {
+        dispatch(closeAllActionCreator());
+      }, 3000);
+      return false;
+    }
+    dispatch(closeAllActionCreator());
+    return true;
+  }, [dispatch]);
+
   const loadReviewsByBrand = useCallback(
     async (brand: string) => {
       const token = localStorage.getItem("token");
@@ -198,6 +223,7 @@ const useReviews = () => {
     loadReviewById,
     updateReview,
     loadReviewsByBrand,
+    loadaAllReviews,
   };
 };
 
