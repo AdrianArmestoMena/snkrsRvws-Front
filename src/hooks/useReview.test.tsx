@@ -122,7 +122,7 @@ describe("Given a useReviews custom hook", () => {
         },
       } = renderHook(useReviews, { wrapper: Wrapper });
 
-      await loadReviewsByOwner();
+      await loadReviewsByOwner(1);
 
       expect(mockUseDispatch).toHaveBeenCalledWith(
         loadReviewsActionCreator(getReviews)
@@ -152,7 +152,7 @@ describe("Given a useReviews custom hook", () => {
         },
       } = renderHook(useReviews, { wrapper: Wrapper });
 
-      await loadReviewsByOwner();
+      await loadReviewsByOwner(1);
 
       expect(mockUseDispatch).not.toHaveBeenCalledWith(
         loadReviewsActionCreator(getReviews)
@@ -169,7 +169,7 @@ describe("Given a useReviews custom hook", () => {
         },
       } = renderHook(useReviews, { wrapper: Wrapper });
 
-      await loadReviewsByOwner();
+      await loadReviewsByOwner(1);
 
       jest.advanceTimersByTime(3100);
       expect(mockUseDispatch).toHaveBeenCalledWith(closeAllActionCreator);
@@ -439,7 +439,7 @@ describe("Given a useReviews custom hook", () => {
         },
       } = renderHook(useReviews, { wrapper: Wrapper });
 
-      await loadaAllReviews();
+      await loadaAllReviews(1);
 
       expect(mockUseDispatch).toHaveBeenCalledWith(
         loadReviewsActionCreator(getReviews)
@@ -455,10 +455,44 @@ describe("Given a useReviews custom hook", () => {
         },
       } = renderHook(useReviews, { wrapper: Wrapper });
 
-      await loadaAllReviews();
+      await loadaAllReviews(1);
 
       jest.advanceTimersByTime(3100);
       expect(mockUseDispatch).toHaveBeenCalledWith(closeAllActionCreator);
     });
+
+    test("Then if the request return an empty array it shouldn't called the dispatch with the cloase loadreviews action creator", async () => {
+      axios.get = jest.fn().mockResolvedValue({ data: { reviews: [] } });
+
+      const {
+        result: {
+          current: { loadaAllReviews },
+        },
+      } = renderHook(useReviews, { wrapper: Wrapper });
+
+      await loadaAllReviews(1);
+
+      expect(mockUseDispatch).not.toHaveBeenCalledWith(
+        loadReviewsActionCreator
+      );
+      expect(mockUseDispatch).toHaveBeenCalledWith(closeAllActionCreator);
+    });
+  });
+});
+
+describe("When loadbReviewsby owner method is called with a correct owner id", () => {
+  test("Then if the request return an empty array it shouldn't called the dispatch with the cloase loadreviews action creator", async () => {
+    axios.get = jest.fn().mockResolvedValue({ data: { reviews: [] } });
+
+    const {
+      result: {
+        current: { loadReviewsByOwner },
+      },
+    } = renderHook(useReviews, { wrapper: Wrapper });
+
+    await loadReviewsByOwner(1);
+
+    expect(mockUseDispatch).not.toHaveBeenCalledWith(loadReviewsActionCreator);
+    expect(mockUseDispatch).toHaveBeenCalledWith(closeAllActionCreator);
   });
 });
