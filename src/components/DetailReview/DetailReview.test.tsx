@@ -41,7 +41,7 @@ jest.mock("../../hooks/useReviews", () => () => mockUseReviews);
 describe("Given a ReviewCard component", () => {
   describe("When it is instantiated with a review as props", () => {
     test("The it should show a heading with the brand and the model of the review", () => {
-      wrappedRender(<DetailReview />);
+      wrappedRender(<DetailReview userId={mockReviews[0].owner} />);
       const heading = screen.getByRole("heading", {
         name: `${mockReviews[0].brand} ${mockReviews[0].model}`,
       });
@@ -50,21 +50,14 @@ describe("Given a ReviewCard component", () => {
     });
 
     test("Then it should show the review image", () => {
-      wrappedRender(<DetailReview />);
+      wrappedRender(<DetailReview userId={mockReviews[0].owner} />);
       const image = screen.getByRole("img");
 
       expect(image).toHaveAttribute("src", mockReviews[0].backupImage);
     });
 
-    test("Then it should show the owner", () => {
-      wrappedRender(<DetailReview />);
-      const owner = screen.getByText(`by ${mockReviews[0].owner}`);
-
-      expect(owner).toBeInTheDocument();
-    });
-
     test("If the user click on the delete button it should call the use reviews's delete review function with the id of the review", async () => {
-      wrappedRender(<DetailReview />);
+      wrappedRender(<DetailReview userId={mockReviews[0].owner} />);
       const route = "/your-reviews";
       const deleteButton = screen.getByText("Delete");
 
@@ -75,13 +68,29 @@ describe("Given a ReviewCard component", () => {
     });
 
     test("If the user click on the modify button it should call the navigate with /modify/ and the id of the review", async () => {
-      wrappedRender(<DetailReview />);
+      wrappedRender(<DetailReview userId={mockReviews[0].owner} />);
       const route = `/modify/${mockReviews[0].id}`;
-      const deleteButton = screen.getByText("Modify");
+      const modifyButton = screen.getByText("Modify");
 
-      await userEvent.click(deleteButton);
+      await userEvent.click(modifyButton);
 
       expect(mockNavigate).toBeCalledWith(route);
+    });
+
+    test("If user's id is different as review's owner delete button shouldn't be in the document", async () => {
+      wrappedRender(<DetailReview userId="" />);
+
+      const deleteButton = screen.queryByText("Delete");
+
+      expect(deleteButton).not.toBeInTheDocument();
+    });
+
+    test("If user's id is different as review's owner modify button shouldn't be in the document", async () => {
+      wrappedRender(<DetailReview userId="" />);
+
+      const modifyButton = screen.queryByText("Modify");
+
+      expect(modifyButton).not.toBeInTheDocument();
     });
   });
 });
