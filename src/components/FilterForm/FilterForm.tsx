@@ -2,12 +2,14 @@ import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import useReviews from "../../hooks/useReviews";
 import FilterFormStyle from "./FilterForm.style";
-
-const FilterForm = (): JSX.Element => {
+interface FilterFormProps {
+  isHome: boolean;
+}
+const FilterForm = ({ isHome }: FilterFormProps): JSX.Element => {
   const initialState: { brand: string } = {
     brand: "",
   };
-  const { loadReviewsByBrand } = useReviews();
+  const { loadReviewsByBrand, loadReviewsByBrandbyOwner } = useReviews();
   const [brand, setBrand] = useState(initialState);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,8 +17,9 @@ const FilterForm = (): JSX.Element => {
   };
   const handleClick = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await loadReviewsByBrand(brand.brand);
-
+    isHome
+      ? await loadReviewsByBrand(brand.brand)
+      : loadReviewsByBrandbyOwner(brand.brand);
     setBrand(initialState);
   };
 

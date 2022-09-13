@@ -5,7 +5,7 @@ import YourReviewsPageStyle from "../YourReviewsPage/YourReviewsPage.style";
 const HomePage = (): JSX.Element => {
   return (
     <YourReviewsPageStyle>
-      <FilterForm />
+      <FilterForm isHome={true} />
       <h2 className="tittle">Reviews</h2>
       <ReviewsList isHome={true} />
     </YourReviewsPageStyle>
