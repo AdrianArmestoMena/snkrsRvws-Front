@@ -28,6 +28,7 @@ const ReviewsList = ({ isHome }: ReviewsListParams): JSX.Element => {
           model={review.model}
           picture={review.picture}
           owner={!isHome ? user.userName : ""}
+          ownerId={review.owner}
           id={review.id}
           backupImage={review.backupImage}
         />
