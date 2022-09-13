@@ -11,7 +11,6 @@ interface ReviewsListParams {
 
 const ReviewsList = ({ isHome }: ReviewsListParams): JSX.Element => {
   const { loadReviewsByOwner, loadaAllReviews } = useReviews();
-  console.log(isHome);
   const reviews = useAppSelector((state) => state.reviews);
   const user = useAppSelector((state) => state.users);
 
@@ -19,7 +18,7 @@ const ReviewsList = ({ isHome }: ReviewsListParams): JSX.Element => {
     !isHome ? loadReviewsByOwner(1) : loadaAllReviews(1);
   }, [loadReviewsByOwner, isHome, loadaAllReviews]);
 
-  return reviews[0].brand !== "" ? (
+  return reviews.length ? (
     <ReviewsListStyle>
       {reviews.map((review) => (
         <ReviewCard

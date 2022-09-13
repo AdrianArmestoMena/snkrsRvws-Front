@@ -160,6 +160,37 @@ describe("Given a useReviews custom hook", () => {
       expect(mockUseDispatch).toHaveBeenCalledWith(mockThrowError);
     });
 
+    test("Then if the request return an empty array and page is diferent it shouldn't call load reviews action", async () => {
+      mockUser.id = "123456";
+
+      const getReviews = [
+        {
+          brand: "NIke",
+          model: "Jordan 11 low black and white",
+          picture: "uploads/f96fc1f1c03538f4940955da94925f90",
+          review: "weqklrn ejq rtjqenr qejrt qer iluqe",
+          owner: "6310d142612b1f0a1cec8961",
+          likes: [],
+          comments: [],
+          id: "6315c901e752dbaefbdfca05",
+          backupImage: "url",
+        },
+      ];
+
+      const {
+        result: {
+          current: { loadReviewsByOwner },
+        },
+      } = renderHook(useReviews, { wrapper: Wrapper });
+
+      await loadReviewsByOwner(2);
+
+      expect(mockUseDispatch).not.toHaveBeenCalledWith(
+        loadReviewsActionCreator(getReviews)
+      );
+      expect(mockUseDispatch).toHaveBeenCalledWith(closeAllActionCreator);
+    });
+
     test("Then if the request return an error it should called the dispatch with the cloase all modals action after 3 seconds", async () => {
       mockUser.id = "12345";
 

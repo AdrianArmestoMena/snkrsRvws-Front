@@ -87,7 +87,7 @@ const useReviews = () => {
             },
           }
         );
-        if (reviews.length) {
+        if (reviews.length || page === 1) {
           dispatch(loadReviewsActionCreator(reviews));
           dispatch(closeAllActionCreator());
           return reviews.length;

@@ -3,6 +3,7 @@ import { rest } from "msw";
 const apiUrl = process.env.REACT_APP_API_URL as string;
 const correctId = "1234";
 const incorrectId = "12345";
+const idNoReviews = "123456";
 const brand = "Nike";
 const wrongBrand = "geox";
 
@@ -110,6 +111,17 @@ const handlers = [
             backupImage: "url",
           },
         ],
+      })
+    );
+  }),
+
+  rest.get(`${apiUrl}/reviews/${idNoReviews}`, async (req, res, ctx) => {
+    const status = 200;
+
+    return res(
+      ctx.status(status),
+      ctx.json({
+        reviews: [],
       })
     );
   }),

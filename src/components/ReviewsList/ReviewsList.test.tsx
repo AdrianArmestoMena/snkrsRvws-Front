@@ -43,18 +43,7 @@ describe("Given a reviews list function", () => {
     });
 
     test("Then there are not reviews in the state it should show an advice", () => {
-      mockReviews = [
-        {
-          brand: "",
-          model: "J",
-          picture: "",
-          review: "",
-          owner: "",
-          likes: [],
-          comments: [],
-          id: "",
-        },
-      ];
+      mockReviews = [];
 
       wrappedRender(<ReviewsList isHome={false}></ReviewsList>);
 
@@ -66,18 +55,7 @@ describe("Given a reviews list function", () => {
     });
 
     test("Then there are not reviews in the state it should show an advice if isHome is true", () => {
-      mockReviews = [
-        {
-          brand: "",
-          model: "J",
-          picture: "",
-          review: "",
-          owner: "",
-          likes: [],
-          comments: [],
-          id: "",
-        },
-      ];
+      mockReviews = [];
 
       wrappedRender(<ReviewsList isHome={true}></ReviewsList>);
 
