@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import useReviews from "../../hooks/useReviews";
+import { useAppSelector } from "../../store/hooks";
 import ReviewCardStyle from "./ReviewCard.style";
 
 interface ReviewCardProps {
@@ -13,6 +14,8 @@ interface ReviewCardProps {
   picture: string;
   id: string;
   backupImage: string;
+
+  ownerId: string;
 }
 
 const ReviewCard = ({
@@ -23,10 +26,11 @@ const ReviewCard = ({
   picture,
   id,
   backupImage,
+  ownerId,
 }: ReviewCardProps): JSX.Element => {
   const navigate = useNavigate();
+  const { id: userId } = useAppSelector((state) => state.users);
   const { deleteReview } = useReviews();
-
   const deleteAction = () => {
     deleteReview(id);
   };
@@ -41,9 +45,13 @@ const ReviewCard = ({
               {owner !== "" ? `by ${owner}` : ""}
             </span>
           </div>
-          <button className="review__icon" onClick={deleteAction}>
-            <FontAwesomeIcon className="review__icon" icon={faXmark} />
-          </button>
+          {userId === ownerId ? (
+            <button className="review__icon" onClick={deleteAction}>
+              <FontAwesomeIcon className="review__icon" icon={faXmark} />
+            </button>
+          ) : (
+            <></>
+          )}
         </div>
         <div className="review__image-container">
           <img

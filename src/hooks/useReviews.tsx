@@ -80,7 +80,7 @@ const useReviews = () => {
         const {
           data: { reviews },
         }: AxiosResponse<ReviewsResponse> = await axios.get(
-          `${apiUrl}/reviews/${user.id}?page=${page}&limit=1`,
+          `${apiUrl}/reviews/${user.id}?page=${page}&limit=10`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -115,7 +115,7 @@ const useReviews = () => {
         const {
           data: { reviews },
         }: AxiosResponse<ReviewsResponse> = await axios.get(
-          `${apiUrl}/reviews?page=${page}&limit=1`,
+          `${apiUrl}/reviews?page=${page}&limit=10`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

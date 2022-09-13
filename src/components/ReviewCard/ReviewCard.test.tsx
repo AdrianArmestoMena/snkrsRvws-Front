@@ -24,7 +24,17 @@ jest.mock("react-router-dom", () => ({
   useNavigate: () => mockNavigate,
 }));
 
+const mockUser = {
+  id: mockReview.owner,
+};
+
+jest.mock("../../store/hooks", () => ({
+  ...jest.requireActual("../../store/hooks"),
+  useAppSelector: () => mockUser,
+}));
+
 describe("Given a ReviewCard component", () => {
+  beforeEach(() => jest.clearAllMocks());
   describe("When it is instantiated with a review as props", () => {
     test("The it should show a heading with the brand and the model of the review", () => {
       wrappedRender(
@@ -36,6 +46,7 @@ describe("Given a ReviewCard component", () => {
           owner={mockReview.owner}
           id={mockReview.id}
           backupImage={mockReview.backupImage}
+          ownerId={mockReview.owner}
         />
       );
       const heading = screen.getByRole("heading", {
@@ -55,6 +66,7 @@ describe("Given a ReviewCard component", () => {
           owner={mockReview.owner}
           id={mockReview.id}
           backupImage={mockReview.backupImage}
+          ownerId={mockReview.owner}
         />
       );
       const image = screen.getByRole("img");
@@ -72,6 +84,7 @@ describe("Given a ReviewCard component", () => {
           owner={mockReview.owner}
           id={mockReview.id}
           backupImage={mockReview.backupImage}
+          ownerId={mockReview.owner}
         />
       );
       const owner = screen.getByText(`by ${mockReview.owner}`);
@@ -89,6 +102,7 @@ describe("Given a ReviewCard component", () => {
           owner={mockReview.owner}
           id={mockReview.id}
           backupImage={mockReview.backupImage}
+          ownerId={mockReview.owner}
         />
       );
 
@@ -109,6 +123,7 @@ describe("Given a ReviewCard component", () => {
           owner={mockReview.owner}
           id={mockReview.id}
           backupImage={mockReview.backupImage}
+          ownerId={mockReview.owner}
         />
       );
 
@@ -128,6 +143,7 @@ describe("Given a ReviewCard component", () => {
           owner={mockReview.owner}
           id={mockReview.id}
           backupImage={mockReview.backupImage}
+          ownerId={mockReview.owner}
         />
       );
 
@@ -136,6 +152,27 @@ describe("Given a ReviewCard component", () => {
       await userEvent.click(viewReview);
 
       expect(mockNavigate).toBeCalledWith(`/review/${mockReview.id}`);
+    });
+    test("If reviews' owner is different as store user's id delete icons shouldn't be in the document", async () => {
+      mockUser.id = "";
+
+      wrappedRender(
+        <ReviewCard
+          brand={mockReview.brand}
+          model={mockReview.model}
+          picture={mockReview.picture}
+          review={mockReview.review}
+          owner={mockReview.owner}
+          id={mockReview.id}
+          backupImage={mockReview.backupImage}
+          ownerId={mockReview.owner}
+        />
+      );
+
+      const deleteIcon = screen.getAllByRole("button");
+      await userEvent.click(deleteIcon[0]);
+
+      expect(mockUseReviews.deleteReview).not.toBeCalledWith(mockReview.id);
     });
   });
 });
