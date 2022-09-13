@@ -19,22 +19,24 @@ const ReviewsList = ({ isHome }: ReviewsListParams): JSX.Element => {
   }, [loadReviewsByOwner, isHome, loadaAllReviews]);
 
   return reviews.length ? (
-    <ReviewsListStyle>
-      {reviews.map((review) => (
-        <ReviewCard
-          key={review.id}
-          review={review.review}
-          brand={review.brand}
-          model={review.model}
-          picture={review.picture}
-          owner={!isHome ? user.userName : ""}
-          ownerId={review.owner}
-          id={review.id}
-          backupImage={review.backupImage}
-        />
-      ))}
+    <>
+      <ReviewsListStyle>
+        {reviews.map((review) => (
+          <ReviewCard
+            key={review.id}
+            review={review.review}
+            brand={review.brand}
+            model={review.model}
+            picture={review.picture}
+            owner={!isHome ? user.userName : ""}
+            ownerId={review.owner}
+            id={review.id}
+            backupImage={review.backupImage}
+          />
+        ))}
+      </ReviewsListStyle>
       <Pagination isHome={isHome} />
-    </ReviewsListStyle>
+    </>
   ) : (
     <h3 className="reviees__no-reviews">
       {isHome ? "No reviews found" : "You don't have reviews yet"}
