@@ -47,11 +47,15 @@ const Pagination = ({ isHome }: PaginationProps): JSX.Element => {
   return (
     <PaginationStyled className="pagination">
       <Button onClick={() => paginationLess()}>
-        <FontAwesomeIcon className="jadsbjfdshfbh" icon={faChevronLeft} />
+        <FontAwesomeIcon
+          className="jadsbjfdshfbh"
+          icon={faChevronLeft}
+          title="previuous_page"
+        />
       </Button>
       <span>{`Page ${pageNumber}`}</span>
       <Button className="11111" onClick={() => paginationPlus()}>
-        <FontAwesomeIcon icon={faChevronRight} />
+        <FontAwesomeIcon icon={faChevronRight} title="next_page" />
       </Button>
     </PaginationStyled>
   );

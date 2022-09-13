@@ -69,9 +69,9 @@ describe("Given a ReviewCard component", () => {
           ownerId={mockReview.owner}
         />
       );
-      const image = screen.getByRole("img");
+      const images = screen.getAllByRole("img");
 
-      expect(image).toHaveAttribute("src", mockReview.backupImage);
+      expect(images[1]).toHaveAttribute("src", mockReview.backupImage);
     });
 
     test("Then it should show the owner", () => {

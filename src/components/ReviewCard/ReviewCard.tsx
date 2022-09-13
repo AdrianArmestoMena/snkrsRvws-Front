@@ -47,7 +47,11 @@ const ReviewCard = ({
           </div>
           {userId === ownerId ? (
             <button className="review__icon" onClick={deleteAction}>
-              <FontAwesomeIcon className="review__icon" icon={faXmark} />
+              <FontAwesomeIcon
+                className="review__icon"
+                icon={faXmark}
+                title="Delete_icon"
+              />
             </button>
           ) : (
             <></>
