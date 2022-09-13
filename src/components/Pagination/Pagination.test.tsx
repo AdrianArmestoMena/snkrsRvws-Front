@@ -71,7 +71,6 @@ describe("Given a Pagination component", () => {
 
       const buttons = screen.getAllByRole("button");
       await fireEvent.click(buttons[0]);
-      console.log(buttons[0]);
       expect(setPage).not.toHaveBeenCalledTimes(2);
     });
 
