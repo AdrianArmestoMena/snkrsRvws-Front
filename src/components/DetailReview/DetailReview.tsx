@@ -33,7 +33,7 @@ const DetailReview = ({ userId }: DetailReviewProps): JSX.Element => {
       <div className="review__image-container">
         <img
           className="review__image"
-          width={500}
+          height={400}
           src={review.backupImage}
           alt={`${review.brand} ${review.model}`}
         />
