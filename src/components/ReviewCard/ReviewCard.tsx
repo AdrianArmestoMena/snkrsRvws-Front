@@ -60,7 +60,7 @@ const ReviewCard = ({
         <div className="review__image-container">
           <img
             className="review__image"
-            width={500}
+            height={500}
             src={backupImage}
             alt="bamba"
           />
