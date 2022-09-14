@@ -90,7 +90,7 @@ exports[`Given a review form Page component When it's instantiated Then it shoul
       disabled={false}
       type="submit"
     >
-      Craete Review
+      Create Review
     </button>
   </form>
 </main>
