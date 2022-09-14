@@ -37,11 +37,13 @@ const DetailReviewStyle = styled.article`
         float: left;
       }
     }
-
     &__image {
       border-radius: 10px;
-      max-width: 100%;
-      max-height: 100%;
+      min-width: 100%;
+      width: 250px;
+      @media (min-width: 900px) {
+        width: 350px;
+      }
     }
     &__buttons-container {
       display: flex;

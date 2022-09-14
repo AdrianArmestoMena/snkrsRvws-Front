@@ -50,6 +50,12 @@ const ReviewCardStyle = styled.li`
       border-radius: 10px;
       max-width: 100%;
       max-height: 100%;
+      height: 270px;
+      width: 270px;
+      @media (min-width: 900px) {
+        width: 350px;
+        height: 350px;
+      }
     }
     &__buttons-container {
       display: flex;
@@ -76,7 +82,7 @@ const ReviewCardStyle = styled.li`
     }
     &__review {
       overflow: auto;
-      max-height: 40rem;
+      max-height: 30rem;
       display: none;
       flex: 1;
       font-weight: 700;
