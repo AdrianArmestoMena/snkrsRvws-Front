@@ -26,6 +26,7 @@ const Pagination = ({ isHome }: PaginationProps): JSX.Element => {
         : await loadaAllReviews(pagePlus)) !== 0
     ) {
       setPage(pagePlus);
+      window.scrollTo(0, 0);
     }
   };
 
