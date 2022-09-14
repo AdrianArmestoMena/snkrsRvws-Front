@@ -39,10 +39,11 @@ const DetailReviewStyle = styled.article`
     }
     &__image {
       border-radius: 10px;
-      min-width: 100%;
       width: 250px;
+      height: 250px;
       @media (min-width: 900px) {
         width: 350px;
+        height: 350px;
       }
     }
     &__buttons-container {
