@@ -10,7 +10,6 @@ const ReviewForm = (): JSX.Element => {
   const { reviewId } = useParams();
   const { id: userId } = useAppSelector((state) => state.users);
   const [firstReview] = useAppSelector((state) => state.reviews);
-  const { picture, brand, model, review: initialReview } = firstReview;
   const { createReview, updateReview, loadReviewById } = useReviews();
 
   useEffect(() => {
@@ -19,10 +18,10 @@ const ReviewForm = (): JSX.Element => {
     }
   }, [loadReviewById, reviewId]);
   const initialState = {
-    brand: reviewId ? brand : "",
-    model: reviewId ? model : "",
-    review: reviewId ? initialReview : "",
-    picture: reviewId ? picture : "",
+    brand: reviewId ? firstReview.brand : "",
+    model: reviewId ? firstReview.model : "",
+    review: reviewId ? firstReview.review : "",
+    picture: reviewId ? firstReview.picture : "",
   };
 
   const [validated, setValidated] = useState(false);
@@ -106,7 +105,7 @@ const ReviewForm = (): JSX.Element => {
         variant="primary"
         type="submit"
       >
-        {!reviewId ? "Craete Review" : "Modify"}
+        {!reviewId ? "Create Review" : "Modify"}
       </Button>
     </Form>
   );

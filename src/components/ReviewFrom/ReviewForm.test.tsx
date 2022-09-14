@@ -99,7 +99,7 @@ describe("Given a ReviewForm function", () => {
       const inputModel = screen.getByLabelText("Model");
       await userEvent.type(inputModel, typeModel);
 
-      const button = screen.getByRole("button", { name: "Craete Review" });
+      const button = screen.getByRole("button", { name: "Create Review" });
       await userEvent.click(button);
 
       expect(mockUseReviews.createReview).toHaveBeenCalled();
@@ -109,7 +109,7 @@ describe("Given a ReviewForm function", () => {
       mockParam.reviewId = false;
       wrappedRender(<ReviewForm />);
 
-      const button = screen.getByRole("button", { name: "Craete Review" });
+      const button = screen.getByRole("button", { name: "Create Review" });
       await userEvent.click(button);
 
       expect(mockUseReviews.createReview).not.toHaveBeenCalled();
