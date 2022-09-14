@@ -72,12 +72,16 @@ const ReviewCard = ({
           >
             View Review
           </Button>
-          <Button
-            onClick={deleteAction}
-            className="review__button review__delete-button"
-          >
-            Delete
-          </Button>
+          {userId === ownerId ? (
+            <Button
+              onClick={deleteAction}
+              className="review__button review__delete-button"
+            >
+              Delete
+            </Button>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
       <p className="review__review">{review}</p>
