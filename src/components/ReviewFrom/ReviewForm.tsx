@@ -8,8 +8,10 @@ let formData = new FormData();
 
 const ReviewForm = (): JSX.Element => {
   const { reviewId } = useParams();
+
   const { id: userId } = useAppSelector((state) => state.users);
   const [firstReview] = useAppSelector((state) => state.reviews);
+
   const { createReview, updateReview, loadReviewById } = useReviews();
 
   useEffect(() => {
@@ -17,7 +19,8 @@ const ReviewForm = (): JSX.Element => {
       loadReviewById(reviewId);
     }
   }, [loadReviewById, reviewId]);
-  const initialState = {
+
+  const initialReviewState = {
     brand: reviewId ? firstReview.brand : "",
     model: reviewId ? firstReview.model : "",
     review: reviewId ? firstReview.review : "",
@@ -25,11 +28,12 @@ const ReviewForm = (): JSX.Element => {
   };
 
   const [validated, setValidated] = useState(false);
-  const [review, setReview] = useState(initialState);
+  const [review, setReview] = useState(initialReviewState);
 
   const handleClick = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
+
     if (!form.checkValidity()) {
       event.stopPropagation();
       setValidated(true);
@@ -40,8 +44,10 @@ const ReviewForm = (): JSX.Element => {
       (await !reviewId)
         ? createReview(formData)
         : updateReview(formData, reviewId as string);
+
       formData = new FormData();
-      setReview(initialState);
+
+      setReview(initialReviewState);
       setValidated(false);
     }
   };
