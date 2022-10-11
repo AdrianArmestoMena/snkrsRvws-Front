@@ -37,19 +37,19 @@ const ReviewForm = (): JSX.Element => {
     if (!form.checkValidity()) {
       event.stopPropagation();
       setValidated(true);
-    } else {
-      event.preventDefault();
-      formData.append("review", JSON.stringify({ ...review, owner: userId }));
-
-      (await !reviewId)
-        ? createReview(formData)
-        : updateReview(formData, reviewId as string);
-
-      formData = new FormData();
-
-      setReview(initialReviewState);
-      setValidated(false);
+      return;
     }
+    event.preventDefault();
+    formData.append("review", JSON.stringify({ ...review, owner: userId }));
+
+    (await !reviewId)
+      ? createReview(formData)
+      : updateReview(formData, reviewId as string);
+
+    formData = new FormData();
+
+    setReview(initialReviewState);
+    setValidated(false);
   };
 
   const onChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {

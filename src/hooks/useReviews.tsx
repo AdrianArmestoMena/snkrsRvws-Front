@@ -188,7 +188,7 @@ const useReviews = () => {
             },
           }
         );
-        console.log(reviews);
+
         dispatch(loadReviewsActionCreator(reviews));
       } catch (error) {
         const errorObject = JSON.parse((error as AxiosError).request.response);
