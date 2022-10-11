@@ -62,7 +62,7 @@ const ReviewCard = ({
             className="review__image"
             height={350}
             src={backupImage}
-            alt="bamba"
+            alt={`${brand} ${model}`}
           />
         </div>
         <div className="review__buttons-container">
